@@ -10,7 +10,7 @@
 			Indented
 		</button>
 
-		<mat-checkbox [(ngModel)]="useMaterial" (change)="styleChanged($event.checked)" matTooltip="Table in Material style">Material</mat-checkbox>
+		<!--<mat-checkbox [(ngModel)]="useMaterial" (change)="styleChanged($event.checked)" matTooltip="Table in Material style">Material</mat-checkbox>-->
 		<label>{{currentFileName}}</label>
 	</mat-toolbar>
 </div>
@@ -18,16 +18,13 @@
 <div class="container-fluid app-container">
 	<mat-tab-group animationDuration="0">
 		<mat-tab label="Table">
-			<ng-template matTabContent>
-				<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
-				<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>
-				<tree-table-cdk *ngIf="!useMaterial && hackFlag" [data]="tableData"></tree-table-cdk>
-			</ng-template>
+			<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
+			<!--<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>-->
+			<tree-table-cdk *ngIf="hackFlag" [data]="tableData"></tree-table-cdk>
 		</mat-tab>
 		<mat-tab label="Tree">
-			<ng-template matTabContent>
-				<json-tree [data]="tableData"></json-tree>
-			</ng-template>
+			<div *ngIf="!usedOnce">Display loaded JSON data in tree.</div>
+			<json-tree *ngIf="usedOnce" [data]="tableData"></json-tree>
 		</mat-tab>
 	</mat-tab-group>
 </div>
