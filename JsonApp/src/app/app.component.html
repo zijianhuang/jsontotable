@@ -16,8 +16,19 @@
 </div>
 
 <div class="container-fluid app-container">
-	<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
-	<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>
-	<tree-table-cdk *ngIf="!useMaterial && hackFlag" [data]="tableData"></tree-table-cdk>
+	<mat-tab-group animationDuration="0">
+		<mat-tab label="Table">
+			<ng-template matTabContent>
+				<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
+				<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>
+				<tree-table-cdk *ngIf="!useMaterial && hackFlag" [data]="tableData"></tree-table-cdk>
+			</ng-template>
+		</mat-tab>
+		<mat-tab label="Tree">
+			<ng-template matTabContent>
+				<json-tree [data]="tableData"></json-tree>
+			</ng-template>
+		</mat-tab>
+	</mat-tab-group>
 </div>
 <!--<tabulator-table [tableData]="tableData" [columnNames]="columnNames"  [height]="'800px'"></tabulator-table>-->

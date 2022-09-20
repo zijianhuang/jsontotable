@@ -12,10 +12,12 @@ import { Nmce_UI_ServicesModule, NmceComponentsModule } from 'nmce';
 import { TreeTableCdkComponent } from './tree-table-cdk.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { JsonTreeComponent } from './json-tree.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
+		JsonTreeComponent,
 		TreeTableComponent,
 		TreeTableCdkComponent,
 		ConfirmUploadComponent,

@@ -24,6 +24,7 @@
     "@angular/router": "^14.2.2",
     "@angular/service-worker": "^14.2.2",
     "jest-editor-support": "*",
+    "json-formatter-js": "^2.3.4",
     "nmce": "^0.1.2",
     "nmce-directives": "^0.1.2",
     "nmce-func": "^0.1.2",
