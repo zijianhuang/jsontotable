@@ -1,0 +1,39 @@
+<table *ngIf="data.length>0" cdk-table [dataSource]="data" class="cdk-elevation-z8" multiTemplateDataRows>
+	<ng-container *ngFor="let column of rootTableColumnDefs" [matColumnDef]="column.columnDef">
+		<th cdk-header-cell *matHeaderCellDef>
+			{{column.header}}
+		</th>
+		<td cdk-cell *matCellDef="let row">
+			{{column.cell(row)}}
+		</td>
+	</ng-container>
+
+	<ng-container *ngFor="let fn of objectFieldNames; let i = index" [matColumnDef]="'expandedObjectDetail' + i">
+		<td cdk-cell *matCellDef="let element" [attr.colspan]="getNonArrayFieldCount(element[fn])">
+			<label class="nested-object-field-name">{{fn}}</label>
+			<tree-table-cdk [data]="element[fn]"></tree-table-cdk>
+		</td>
+	</ng-container>
+
+	<ng-container *ngFor="let fn of arrayFieldNames; let i = index" [matColumnDef]="'expandedArrayDetail' + i">
+		<td cdk-cell *matCellDef="let element" [attr.colspan]="getNonArrayFieldCount(element[fn])">
+			<label class="nested-array-field-name">{{fn}}</label>
+			<tree-table-cdk [data]="element[fn]"></tree-table-cdk>
+		</td>
+	</ng-container>
+
+	<ng-container *ngIf="displayedColumns.length>0">
+		<tr cdk-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr cdk-row *matRowDef="let row; columns: displayedColumns;"></tr>
+	</ng-container>
+
+	<ng-container *ngFor="let fn of arrayFieldNames; let i = index">
+		<tr cdk-row *matRowDef="let row; columns: ['expandedArrayDetail'+i]" class="example-detail-row"></tr>
+	</ng-container>
+
+	<ng-container *ngFor="let fn of objectFieldNames; let i = index">
+		<tr cdk-row *matRowDef="let row; columns: ['expandedObjectDetail'+i]" class="example-detail-row"></tr>
+	</ng-container>
+
+</table>
+

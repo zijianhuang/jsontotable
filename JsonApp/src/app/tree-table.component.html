@@ -1,0 +1,39 @@
+<table *ngIf="data.length>0" mat-table [dataSource]="data" multiTemplateDataRows>
+	<ng-container *ngFor="let column of rootTableColumnDefs" [matColumnDef]="column.columnDef">
+		<th mat-header-cell *matHeaderCellDef>
+			{{column.header}}
+		</th>
+		<td mat-cell *matCellDef="let row">
+			{{column.cell(row)}}
+		</td>
+	</ng-container>
+
+	<ng-container *ngFor="let fn of objectFieldNames; let i = index" [matColumnDef]="'expandedObjectDetail' + i">
+		<td mat-cell *matCellDef="let element" [attr.colspan]="getNonArrayFieldCount(element[fn])">
+			<label class="nested-object-field-name">{{fn}}</label>
+			<tree-table [data]="element[fn]"></tree-table>
+		</td>
+	</ng-container>
+
+	<ng-container *ngFor="let fn of arrayFieldNames; let i = index" [matColumnDef]="'expandedArrayDetail' + i">
+		<td mat-cell *matCellDef="let element" [attr.colspan]="getNonArrayFieldCount(element[fn])">
+			<label class="nested-array-field-name">{{fn}}</label>
+			<tree-table [data]="element[fn]"></tree-table>
+		</td>
+	</ng-container>
+
+	<ng-container *ngIf="displayedColumns.length>0">
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+	</ng-container>
+
+	<ng-container *ngFor="let fn of arrayFieldNames; let i = index">
+		<tr mat-row *matRowDef="let row; columns: ['expandedArrayDetail'+i]"></tr>
+	</ng-container>
+
+	<ng-container *ngFor="let fn of objectFieldNames; let i = index">
+		<tr mat-row *matRowDef="let row; columns: ['expandedObjectDetail'+i]"></tr>
+	</ng-container>
+
+</table>
+

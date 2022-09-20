@@ -1,0 +1,15 @@
+<div mat-dialog-title fxLayout="row">
+    <strong fxFlexAlign="start">{{ title }}</strong>
+</div>
+<mat-dialog-content>
+    <p>{{ body }}</p>
+    <input id="uploadFile" name="uploadFile" type="file" (change)="fileChangeListener($event)"
+           [accept]="acceptFilter" matTooltip="Filtered for doc, Excel, PowerPoint, zip, image, video, audio" />
+    <div *ngIf="file">
+        <p>MIME Type: {{ mimeType }}</p>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions fxLayoutGap="0.5em" fxLayoutAlign="center center">
+    <button type="button" mat-button mat-raised-button (click)="confirm()" [disabled]="!file">Yes</button>
+    <button type="button" mat-button mat-raised-button (click)="cancel()">No</button>
+</mat-dialog-actions>

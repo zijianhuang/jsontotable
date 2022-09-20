@@ -1,0 +1,35 @@
+.fixed-top {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 990;
+}
+
+.fixed-top-above {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 995;
+}
+
+.container-fluid {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.app-container {
+	padding-top: 4.5em;
+	padding-bottom: 0.5em;
+}
+
+.nested-object-field-name {
+	font-weight: bold;
+}
+
+.nested-array-field-name {
+	font-style: italic;
+	font-weight: bold;
+}

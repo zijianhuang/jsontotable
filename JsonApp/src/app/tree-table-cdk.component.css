@@ -1,0 +1,25 @@
+tr.cdk-row {
+	border: 1px solid red;
+}
+
+.cdk-table {
+	overflow: auto;
+	border: 2px solid black;
+}
+
+th.cdk-header-cell {
+	border: 1px solid blue;
+}
+
+td.cdk-cell {
+	border: 1px solid green;
+	height: 1.5em;
+}
+
+	td.cdk-cell:first-child {
+		border-left: 1px solid blue;
+	}
+
+	td.cdk-cell:last-child {
+		border-right: 1px solid blue;
+	}

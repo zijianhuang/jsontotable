@@ -1,0 +1,23 @@
+<div class="fixed-top">
+	<mat-toolbar #toolbar fxLayoutGap="1em">
+		<button mat-button mat-raised-button type="button" (click)="loadJsonFile()" matTooltip="Load JSON file">
+			Load
+		</button>
+		<button mat-button mat-raised-button type="button" (click)="pasteFromClipboard()" matTooltip="Paste from Clipboard">
+			Paste
+		</button>
+		<button mat-button mat-raised-button type="button" (click)="getIndentedText()" matTooltip="Copy indented JSON to clipboard">
+			Indented
+		</button>
+
+		<mat-checkbox [(ngModel)]="useMaterial" (change)="styleChanged($event.checked)" matTooltip="Table in Material style">Material</mat-checkbox>
+		<label>{{currentFileName}}</label>
+	</mat-toolbar>
+</div>
+
+<div class="container-fluid app-container">
+	<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
+	<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>
+	<tree-table-cdk *ngIf="!useMaterial && hackFlag" [data]="tableData"></tree-table-cdk>
+</div>
+<!--<tabulator-table [tableData]="tableData" [columnNames]="columnNames"  [height]="'800px'"></tabulator-table>-->
