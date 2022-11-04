@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Input JSON Text</h1>
+<div mat-dialog-content>
+    <p>Please use Ctrl+V or system paste function to paste text.</p>
+    <mat-form-field  fxFlexFill>
+        <mat-label>JSON text</mat-label>
+        <textarea matInput placeholder="JSON text ..." [(ngModel)]="data" autofocus></textarea>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-raised-button cdkFocusInitial (click)="useText()" [disabled]="!data">Use</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+</div>

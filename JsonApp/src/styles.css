@@ -33,3 +33,7 @@
 	font-style: italic;
 	font-weight: bold;
 }
+
+.scrollbox{
+	overflow: scroll;
+}

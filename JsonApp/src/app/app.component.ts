@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, O
 import { ConfirmUploadService } from './confirmUpload.component';
 import { AlertService } from 'nmce';
 import { APP_DI_CONFIG } from './app-config';
+import { TextareaDialogService } from './textarea.component';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -41,6 +42,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	constructor(public confirmUploadService: ConfirmUploadService,
 		private ref: ChangeDetectorRef,
 		private alertService: AlertService,
+		private textareaDialogService: TextareaDialogService,
 	) {
 		this.alertService.initOnce();
 		this.displayNewVersions();
@@ -109,15 +111,42 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	}
 
-	pasteFromClipboard() {
-		navigator.clipboard.readText().then( //on Firefox, need to follow https://stackoverflow.com/questions/67440036/navigator-clipboard-readtext-is-not-working-in-firefox first.
-			s => {
-				this.assignText(s);
-				this.currentFileName = 'Clipboard';
-				this.ref.detectChanges();
-			}
-		);
+	async pasteFromClipboard() {
+		// @ts-ignore
+		const isFirefox = typeof InstallTrigger !== 'undefined';
+		if (isFirefox) {
+			this.alertService.info('In Firefox, please presss ctrl+V to paste.', true);
+			this.textareaDialogService.open().subscribe(
+				text => {
+					if (text) {
+						this.assignText(text);
+						this.currentFileName = 'Clipboard';
+						this.ref.detectChanges();
+					}
+				}
+			);
+		} else {
+
+			navigator.clipboard.readText().then( //on Firefox, need to follow https://stackoverflow.com/questions/67440036/navigator-clipboard-readtext-is-not-working-in-firefox first.
+				s => {
+					this.assignText(s);
+					this.currentFileName = 'Clipboard';
+					this.ref.detectChanges();
+				}
+			);
+		}
 	}
+
+	static copyPlainTextToClipboard(plainText: string) {
+		const listener = (e: ClipboardEvent) => {
+			e.clipboardData?.setData("text/plain", plainText);
+			e.preventDefault();
+			document.removeEventListener("copy", listener);
+		};
+
+		document.addEventListener("copy", listener);
+		document.execCommand("copy");
+	};
 
 	getIndentedText() {
 		const indented = JSON.stringify(this.tableData, null, '\t');

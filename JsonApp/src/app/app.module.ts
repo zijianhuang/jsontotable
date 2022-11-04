@@ -13,6 +13,7 @@ import { TreeTableCdkComponent } from './tree-table-cdk.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { JsonTreeComponent } from './json-tree.component';
+import { TextareaComponent, TextareaDialogService } from './textarea.component';
 
 @NgModule({
 	declarations: [
@@ -21,6 +22,7 @@ import { JsonTreeComponent } from './json-tree.component';
 		TreeTableComponent,
 		TreeTableCdkComponent,
 		ConfirmUploadComponent,
+		TextareaComponent,
 	],
 	imports: [
 		FormsModule,
@@ -37,7 +39,7 @@ import { JsonTreeComponent } from './json-tree.component';
 		FlexLayoutModule,
 		Nmce_UI_ServicesModule, NmceComponentsModule,
 	],
-	providers: [ConfirmUploadService],
+	providers: [ConfirmUploadService, TextareaDialogService,],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

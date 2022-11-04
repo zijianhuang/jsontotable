@@ -1,5 +1,5 @@
 ::Build for testing with dotnet hosting. File buildTime.js is included in angular.json for be built.
-cd %~dp0NGSource
+cd %~dp0
 
 for /f "skip=1" %%x in ('wmic os get localdatetime') do if not defined MyDate set MyDate=%%x
 
