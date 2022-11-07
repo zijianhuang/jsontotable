@@ -24,15 +24,19 @@
 </div>
 
 <div class="container-fluid app-container">
-	<mat-tab-group animationDuration="0">
+	<mat-tab-group animationDuration="0" preserveContent>
 		<mat-tab label="Table">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
 			<!--<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>-->
-			<tree-table-cdk *ngIf="hackFlag" [data]="tableData"></tree-table-cdk>
+			<div class="table-container">
+				<tree-table-cdk *ngIf="hackFlag" [data]="tableData"></tree-table-cdk>
+			</div>
 		</mat-tab>
 		<mat-tab label="Tree">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tree.</div>
-			<json-tree *ngIf="usedOnce" [data]="tableData"></json-tree>
+			<div class="table-container">
+				<json-tree *ngIf="usedOnce" [data]="tableData"></json-tree>
+			</div>
 		</mat-tab>
 	</mat-tab-group>
 </div>

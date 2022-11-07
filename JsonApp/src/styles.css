@@ -12,7 +12,7 @@
 	right: 0;
 	left: 0;
 	z-index: 995;
-}
+}chrome://settings/clearBrowserData
 
 .container-fluid {
 	width: 100%;
@@ -34,14 +34,8 @@
 	font-weight: bold;
 }
 
-.scrollbox{
-	overflow: scroll;
-	width: 95%;
-	height: 95%;
-}
-
-.table-container {
+div.table-container {
 	width: 100%;
-	height: calc(100vh - 9em);
+	height: calc(100vh - 9.5em);
 	overflow: auto;
 }
