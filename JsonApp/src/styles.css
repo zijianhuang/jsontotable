@@ -36,4 +36,12 @@
 
 .scrollbox{
 	overflow: scroll;
+	width: 95%;
+	height: 95%;
+}
+
+.table-container {
+	width: 100%;
+	height: calc(100vh - 9em);
+	overflow: auto;
 }

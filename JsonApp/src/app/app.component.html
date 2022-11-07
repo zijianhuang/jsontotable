@@ -1,14 +1,22 @@
 <div class="fixed-top">
 	<mat-toolbar #toolbar fxLayoutGap="1em">
-		<button mat-button mat-raised-button type="button" (click)="loadJsonFile()" matTooltip="Load JSON file">
-			Load
+		<button type="button" mat-button mat-raised-button mat-icon-button [matMenuTriggerFor]="mainMenu">
+			<strong>...</strong>
 		</button>
-		<button mat-button mat-raised-button type="button" (click)="pasteFromClipboard()" matTooltip="Paste from Clipboard">
-			Paste
-		</button>
-		<button mat-button mat-raised-button type="button" (click)="getIndentedText()" matTooltip="Copy indented JSON to clipboard">
-			Indented
-		</button>
+		<mat-menu #mainMenu="matMenu" [overlapTrigger]="false">
+			<button mat-menu-item type="button" (click)="loadJsonFile()">
+				Load from File
+			</button>
+			<button mat-menu-item type="button" (click)="loadJsonFromUrl()">
+				Load from URL
+			</button>
+			<button mat-menu-item type="button" (click)="pasteFromClipboard()" matTooltip="Paste from Clipboard">
+				Paste from Clipboard
+			</button>
+			<button mat-menu-item type="button" (click)="getIndentedText()">
+				Copy Indented JSON to Clipboard
+			</button>
+		</mat-menu>
 
 		<!--<mat-checkbox [(ngModel)]="useMaterial" (change)="styleChanged($event.checked)" matTooltip="Table in Material style">Material</mat-checkbox>-->
 		<label>{{currentFileName}}</label>

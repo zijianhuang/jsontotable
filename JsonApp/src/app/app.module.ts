@@ -14,6 +14,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { JsonTreeComponent } from './json-tree.component';
 import { TextareaComponent, TextareaDialogService } from './textarea.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	declarations: [
@@ -28,6 +30,7 @@ import { TextareaComponent, TextareaDialogService } from './textarea.component';
 		FormsModule,
 		BrowserModule,
 		BrowserAnimationsModule,
+		HttpClientModule,
 		ServiceWorkerModule.register(document.baseURI + 'ngsw-worker.js', {
 			enabled: environment.production,
 			// Register the ServiceWorker as soon as the application is stable
@@ -38,6 +41,7 @@ import { TextareaComponent, TextareaDialogService } from './textarea.component';
 		NGMDModule,
 		FlexLayoutModule,
 		Nmce_UI_ServicesModule, NmceComponentsModule,
+		NgxDropzoneModule,
 	],
 	providers: [ConfirmUploadService, TextareaDialogService,],
 	bootstrap: [AppComponent]

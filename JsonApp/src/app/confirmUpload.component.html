@@ -3,11 +3,17 @@
 </div>
 <mat-dialog-content>
     <p>{{ body }}</p>
-    <input id="uploadFile" name="uploadFile" type="file" (change)="fileChangeListener($event)"
-           [accept]="acceptFilter" matTooltip="Filtered for doc, Excel, PowerPoint, zip, image, video, audio" />
+    <ngx-dropzone (change)="onSelect($event)" [multiple]="false" accept="application/json,text/json">
+        <ngx-dropzone-label>Drop JSON file here, or click to select from file system</ngx-dropzone-label>
+        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+    </ngx-dropzone>
+    <!--<input id="uploadFile" name="uploadFile" type="file" (change)="fileChangeListener($event)"
+           [accept]="acceptFilter" />
     <div *ngIf="file">
         <p>MIME Type: {{ mimeType }}</p>
-    </div>
+    </div>-->
 </mat-dialog-content>
 <mat-dialog-actions fxLayoutGap="0.5em" fxLayoutAlign="center center">
     <button type="button" mat-button mat-raised-button (click)="confirm()" [disabled]="!file">Yes</button>

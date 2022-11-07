@@ -1,6 +1,7 @@
 import { Component, Inject, Injectable, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ConfirmService } from 'nmce';
+import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
+import { AlertService, ConfirmService } from 'nmce';
 import { Observable } from 'rxjs';
 
 /**
@@ -22,9 +23,15 @@ export class ConfirmUploadComponent {
 	description?: string;
 	fileSize?: number;
 
+	files: File[] = [];
+
 	acceptFilter = '';
 
-	constructor(@Inject(MAT_DIALOG_DATA) data: { title: string, body: string, acceptFilter?: string }, public dialogRef: MatDialogRef<ConfirmUploadComponent, UploadBrief>, private confirmService: ConfirmService) {
+	constructor(@Inject(MAT_DIALOG_DATA) data: { title: string, body: string, acceptFilter?: string },
+		public dialogRef: MatDialogRef<ConfirmUploadComponent, UploadBrief>,
+		private confirmService: ConfirmService,
+		private alertService: AlertService,
+	) {
 		this.title = data.title;
 		this.body = data.body;
 		this.acceptFilter = data.acceptFilter ?? 'image/*,video/*,text/*,audio/*';
@@ -63,6 +70,28 @@ export class ConfirmUploadComponent {
 			this.name = this.file.name;
 			this.fileSize = this.file.size;
 		}
+	}
+
+
+	onSelect(event: NgxDropzoneChangeEvent) {
+		console.log(event);
+		const acceptedFiles = event.addedFiles.filter(d => d.type.indexOf('json') >= 9);
+		if (acceptedFiles.length > 0) {
+			this.files = [];
+			this.file = acceptedFiles[0];
+			this.files.push(this.file);
+			this.mimeType = this.file.type; // if file.type is not good enough, this might help: https://stackoverflow.com/questions/18299806/how-to-check-file-mime-type-with-javascript-before-upload
+			this.name = this.file.name;
+			this.fileSize = this.file.size;
+		} else {
+			this.alertService.warn('No JSON file selected.');
+		}
+
+	}
+
+	onRemove(file: File) {
+		console.log(file);
+		//this.files.splice(this.files.indexOf(file), 1);
 	}
 
 }

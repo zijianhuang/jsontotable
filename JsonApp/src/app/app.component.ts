@@ -1,8 +1,9 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ConfirmUploadService } from './confirmUpload.component';
-import { AlertService } from 'nmce';
+import { AlertService, TextInputComponent, TextInputService } from 'nmce';
 import { APP_DI_CONFIG } from './app-config';
 import { TextareaDialogService } from './textarea.component';
+import { HttpClient } from '@angular/common/http';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -28,7 +29,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	//	},
 	//];
 
-	tableData = [];
+	tableData: Object = [];
 
 	htmlVersion?: string;
 	htmlBuildTime?: string;
@@ -43,6 +44,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 		private ref: ChangeDetectorRef,
 		private alertService: AlertService,
 		private textareaDialogService: TextareaDialogService,
+		private inputDialogService: TextInputService,
+		private httpClient: HttpClient,
 	) {
 		this.alertService.initOnce();
 		this.displayNewVersions();
@@ -73,6 +76,25 @@ export class AppComponent implements OnInit, AfterViewInit {
 		);
 	}
 
+	loadJsonFromUrl() {
+		this.inputDialogService.open('Type or Paste URL', "URL").subscribe(
+			url => {
+				if (url) {
+					this.httpClient.get(url, { responseType: 'json', headers: { 'ngsw-bypass': '', 'Cache-Control': 'no-cache' } }).subscribe({
+						next: data => {
+							this.assignObject(data);
+							this.currentFileName = 'URL';
+						},
+						error: error => {
+							this.alertService.error(error);
+						}
+					});
+
+				}
+			}
+		);
+	}
+
 	private assignText(s: string) {
 		try {
 			this.tableData = JSON.parse(s);
@@ -81,6 +103,21 @@ export class AppComponent implements OnInit, AfterViewInit {
 			return;
 		}
 
+		this.rerender();
+	}
+
+	private assignObject(obj: Object) {
+		try {
+			this.tableData = obj;
+		} catch (e) {
+			this.alertService.error('JSON may be invalid.');
+			return;
+		}
+
+		this.rerender();
+	}
+
+	private rerender() {
 		this.usedOnce = true;
 		this.hackFlag = false; //https://stackoverflow.com/questions/50383003/how-to-re-render-a-component-manually-angular-5
 		this.ref.detectChanges(); //hacky, but simple and works.
@@ -113,7 +150,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	async pasteFromClipboard() {
 		// @ts-ignore
-		const isFirefox = typeof InstallTrigger !== 'undefined';
+		const isFirefox = typeof InstallTrigger !== 'undefined'; //otherwsie, use ngmd's Platform service
 		if (isFirefox) {
 			this.alertService.info('In Firefox, please presss ctrl+V to paste.', true);
 			this.textareaDialogService.open().subscribe(
