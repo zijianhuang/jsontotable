@@ -40,6 +40,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	usedOnce = false;
 
+	scroll = false;
+
 	constructor(public confirmUploadService: ConfirmUploadService,
 		private ref: ChangeDetectorRef,
 		private alertService: AlertService,
@@ -67,6 +69,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 						if (reader.result) {
 							this.assignText(<string>reader.result);
 							this.currentFileName = brief.name;
+							this.scroll = brief.file!.size > 10000;
 						}
 					};
 

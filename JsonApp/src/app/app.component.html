@@ -28,13 +28,13 @@
 		<mat-tab label="Table">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
 			<!--<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>-->
-			<div class="table-container">
+			<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
 				<tree-table-cdk *ngIf="hackFlag" [data]="tableData"></tree-table-cdk>
 			</div>
 		</mat-tab>
 		<mat-tab label="Tree">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tree.</div>
-			<div class="table-container">
+			<div  [ngClass]="scroll?'table-container-scroll' : 'table-container'">
 				<json-tree *ngIf="usedOnce" [data]="tableData"></json-tree>
 			</div>
 		</mat-tab>

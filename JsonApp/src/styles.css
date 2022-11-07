@@ -39,3 +39,9 @@ div.table-container {
 	height: calc(100vh - 9.5em);
 	overflow: auto;
 }
+
+div.table-container-scroll {
+	width: 100%;
+	height: calc(100vh - 9.5em);
+	overflow: scroll;
+}
