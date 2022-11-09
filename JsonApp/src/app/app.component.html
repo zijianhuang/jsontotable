@@ -30,6 +30,7 @@
 			<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
 				<tree-table-cdk *ngIf="hackFlag" [data]="tableData"></tree-table-cdk>
 			</div>
+			<p></p>
 		</mat-tab>
 		<mat-tab label="Tree">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tree.</div>

@@ -1,5 +1,5 @@
 {
-	"name": "JSON to Table",
+	"name": "JSON to Tables",
 	"short_name": "Json2Table",
 	"description": "Display JSON data in tables and tree; copy indented JSON text to clipboard.",
 	"id": "Fonlow.JSON2Table",
