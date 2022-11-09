@@ -67,9 +67,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 					const reader = new FileReader();
 					reader.onload = () => {
 						if (reader.result) {
-							this.assignText(<string>reader.result);
 							this.currentFileName = brief.name;
 							this.scroll = brief.file!.size > 10000;
+							this.assignText(<string>reader.result);
 						}
 					};
 

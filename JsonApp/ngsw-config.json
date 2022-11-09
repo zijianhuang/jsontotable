@@ -1,8 +1,10 @@
 {
+	"$schema": "./node_modules/@angular/service-worker/config/schema.json",
+	"appData": "JSON2Table ServiceWorker",
 	"index": "/index.html",
 	"assetGroups": [
 		{
-			"name": "app",
+			"name": "appRoot",
 			"installMode": "prefetch",
 			"resources": {
 				"files": [

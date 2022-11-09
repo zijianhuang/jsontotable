@@ -36,12 +36,12 @@
 
 div.table-container {
 	width: 100%;
-	height: calc(100vh - 9.5em);
+	height: calc(100vh - 10em);
 	overflow: auto;
 }
 
 div.table-container-scroll {
 	width: 100%;
-	height: calc(100vh - 9.5em);
+	height: calc(100vh - 10em);
 	overflow: scroll;
 }
