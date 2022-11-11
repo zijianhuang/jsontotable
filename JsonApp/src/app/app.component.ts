@@ -1,9 +1,10 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ConfirmUploadService } from './confirmUpload.component';
 import { AlertService, TextInputComponent, TextInputService } from 'nmce';
 import { APP_DI_CONFIG } from './app-config';
 import { TextareaDialogService } from './textarea.component';
 import { HttpClient } from '@angular/common/http';
+import { MatTabGroup } from '@angular/material/tabs';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -42,6 +43,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	scroll = false;
 
+	@ViewChild('tabGroup') tabGroup?: MatTabGroup;
+
+	currentModuleName: string = 'table';
+
 	constructor(public confirmUploadService: ConfirmUploadService,
 		private ref: ChangeDetectorRef,
 		private alertService: AlertService,
@@ -58,6 +63,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.loading = false;
+		if (this.tabGroup) {
+			this.tabGroup.selectedIndex = 0;
+			console.debug('current tab should be table.');
+		}
 	}
 
 	loadJsonFile() {
@@ -193,5 +202,17 @@ export class AppComponent implements OnInit, AfterViewInit {
 		navigator.clipboard.writeText(indented).then(
 			d => this.alertService.success('Indented JSON text copied to clipboard')
 		);
+	}
+
+	toggleTable() {
+		if (this.tabGroup) {
+			this.tabGroup.selectedIndex = 0;
+		}
+	}
+
+	toggleTree() {
+		if (this.tabGroup) {
+			this.tabGroup.selectedIndex = 1;
+		}
 	}
 }

@@ -1,5 +1,13 @@
 <div class="fixed-top">
 	<mat-toolbar #toolbar fxLayoutGap="1em">
+		<mat-button-toggle-group #menuToggleGroup #group="matButtonToggleGroup" [value]="currentModuleName">
+			<mat-button-toggle (click)="toggleTable()" value="table">
+				<span>Table</span>
+			</mat-button-toggle>
+			<mat-button-toggle (click)="toggleTree()" value="tree">
+				<span>Tree</span>
+			</mat-button-toggle>
+		</mat-button-toggle-group>
 		<button type="button" mat-button mat-raised-button mat-icon-button [matMenuTriggerFor]="mainMenu">
 			<strong>...</strong>
 		</button>
@@ -23,18 +31,17 @@
 </div>
 
 <div class="container-fluid app-container">
-	<mat-tab-group animationDuration="0" preserveContent>
+	<mat-tab-group #tabGroup animationDuration="0" preserveContent class="header-less-tabs">
 		<mat-tab label="Table">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
 			<!--<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>-->
 			<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
 				<tree-table-cdk *ngIf="hackFlag" [data]="tableData"></tree-table-cdk>
 			</div>
-			<p></p>
 		</mat-tab>
 		<mat-tab label="Tree">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tree.</div>
-			<div  [ngClass]="scroll?'table-container-scroll' : 'table-container'">
+			<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
 				<json-tree *ngIf="usedOnce" [data]="tableData"></json-tree>
 			</div>
 		</mat-tab>

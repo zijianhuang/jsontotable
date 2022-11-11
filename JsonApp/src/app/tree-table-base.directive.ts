@@ -153,7 +153,4 @@ export class TreeTableBase implements OnInit {
 
 		}
 	}
-
-
-
 }
