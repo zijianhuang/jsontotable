@@ -19,34 +19,40 @@ export class TreeTableBase implements OnInit {
 		return this._data;
 	}
 	set data(obj: any) {
-		this.rootTableColumnDefs = [];
-		this.displayedColumns = [];
-		this.arrayFieldNames = [];
-		this.objectFieldNames = [];
-
-		if (!Array.isArray(obj)) {
-			this._data = [obj];
-		} else {
-			const firstRow = obj[0];
-			const firstRowType = typeof firstRow;
-			if (this.basicTypes.indexOf(firstRowType) >= 0) {
-				obj = obj.map(d => { return { '[ ]': d } }); // refine the original data on the original reference
-			}
-
+		if (!obj || (Object.keys(obj).length === 0 && obj.constructor === Object)) {
+			console.debug('Object is empty');
 			this._data = obj;
 		}
+		else {
+			this.rootTableColumnDefs = [];
+			this.displayedColumns = [];
+			this.arrayFieldNames = [];
+			this.objectFieldNames = [];
 
-		this.GetTableColumnDef(this._data, this.rootTableColumnDefs);
+			if (!Array.isArray(obj)) {
+				this._data = [obj];
+			} else {
+				const firstRow = obj[0];
+				const firstRowType = typeof firstRow;
+				if (this.basicTypes.indexOf(firstRowType) >= 0) {
+					obj = obj.map(d => { return { '[ ]': d } }); // refine the original data on the original reference
+				}
 
-		console.debug('original data is ' + JSON.stringify(obj));
-		console.debug('transformed data is ' + JSON.stringify(this._data));
-		console.debug('rootTableColumnDefs is ' + JSON.stringify(this.rootTableColumnDefs));
+				this._data = obj;
+			}
 
-		this.displayedColumns = this.rootTableColumnDefs.filter(d => !d.subTableColumnDefs).map(d => d.header);
-		this.arrayFieldNames = this.getArrayFieldNames(this._data[0]);
-		console.debug('arrayFieldNames: ' + this.arrayFieldNames.join(', '));
-		this.objectFieldNames = this.getObjectFieldNames(this._data[0]);
-		console.debug('objectFieldNames: ' + this.objectFieldNames.join(', '));
+			this.GetTableColumnDef(this._data, this.rootTableColumnDefs);
+
+			console.debug('original data is ' + JSON.stringify(obj));
+			console.debug('transformed data is ' + JSON.stringify(this._data));
+			console.debug('rootTableColumnDefs is ' + JSON.stringify(this.rootTableColumnDefs));
+
+			this.displayedColumns = this.rootTableColumnDefs.filter(d => !d.subTableColumnDefs).map(d => d.header);
+			this.arrayFieldNames = this.getArrayFieldNames(this._data[0]);
+			console.debug('arrayFieldNames: ' + this.arrayFieldNames.join(', '));
+			this.objectFieldNames = this.getObjectFieldNames(this._data[0]);
+			console.debug('objectFieldNames: ' + this.objectFieldNames.join(', '));
+		}
 	}
 
 	private readonly basicTypes = ['string', 'number', 'date', 'bigint', 'boolean'];
