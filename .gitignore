@@ -51,3 +51,4 @@ _ReSharper*/
 /ngdist
 /jtngdist
 /JsonApp/src/conf/buildTime.js
+/JsonApp/package-lock.json
