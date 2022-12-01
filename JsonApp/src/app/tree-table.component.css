@@ -1,24 +1,24 @@
-tr.mat-row {
+tr.mat-mdc-row {
 	border: 1px solid red;
 }
 
-.mat-table {
+.mat-mdc-table {
 	overflow: auto;
 	border: 2px solid black;
 }
 
-th.mat-header-cell {
+th.mat-mdc-header-cell {
 	border: 1px solid blue;
 }
 
-td.mat-cell {
+td.mat-mdc-cell {
 	border: 1px solid green;
 }
 
-	td.mat-cell:first-child {
+	td.mat-mdc-cell:first-child {
 		border-left: 1px solid blue;
 	}
 
-	td.mat-cell:last-child {
+	td.mat-mdc-cell:last-child {
 		border-right: 1px solid blue;
 	}

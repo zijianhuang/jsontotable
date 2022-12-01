@@ -1,1 +1,1 @@
-call "c:\green\SimpleHost\SimpleHost.exe" C:\VSProjects\Fonlow\Json2Table\jtngdist\prod\ http://localhost:5300
+dotnet-serve -d C:\VSProjects\Fonlow\Json2Table\jtngdist\prod\ -p 5300
