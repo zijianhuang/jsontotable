@@ -1,4 +1,3 @@
-import { ChangeDetectionStrategy } from '@angular/compiler';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import JSONFormatter from 'json-formatter-js';
 
