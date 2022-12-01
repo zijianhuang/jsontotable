@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter, MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DateAdapter, MatNativeDateModule, MatRippleModule, MAT_DATE_FORMATS, MAT_DATE_LOCALE, } from '@angular/material/core'; //MD tutorial site use this.
 import {
-	MatAutocompleteModule
-} from '@angular/material/autocomplete';
+	MatLegacyAutocompleteModule as MatAutocompleteModule
+} from '@angular/material/legacy-autocomplete';
 import {
 	MatBadgeModule
 } from '@angular/material/badge';
@@ -13,26 +13,26 @@ import {
 	MatBottomSheetModule
 } from '@angular/material/bottom-sheet';
 import {
-	MatButtonModule
-} from '@angular/material/button';
+	MatLegacyButtonModule as MatButtonModule
+} from '@angular/material/legacy-button';
 import {
 	MatButtonToggleModule
 } from '@angular/material/button-toggle';
 import {
-	MatCardModule
-} from '@angular/material/card';
+	MatLegacyCardModule as MatCardModule
+} from '@angular/material/legacy-card';
 import {
-	MatCheckboxModule
-} from '@angular/material/checkbox';
+	MatLegacyCheckboxModule as MatCheckboxModule
+} from '@angular/material/legacy-checkbox';
 import {
-	MatChipsModule
-} from '@angular/material/chips';
+	MatLegacyChipsModule as MatChipsModule
+} from '@angular/material/legacy-chips';
 import {
 	MatDatepickerModule
 } from '@angular/material/datepicker';
 import {
-	MatDialogModule
-} from '@angular/material/dialog';
+	MatLegacyDialogModule as MatDialogModule
+} from '@angular/material/legacy-dialog';
 import {
 	MatExpansionModule
 } from '@angular/material/expansion';
@@ -43,39 +43,39 @@ import {
 	MatIconModule
 } from '@angular/material/icon';
 import {
-	MatInputModule
-} from '@angular/material/input';
+	MatLegacyInputModule as MatInputModule
+} from '@angular/material/legacy-input';
 import {
-	MatListModule
-} from '@angular/material/list';
+	MatLegacyListModule as MatListModule
+} from '@angular/material/legacy-list';
 import {
-	MatMenuModule
-} from '@angular/material/menu';
+	MatLegacyMenuModule as MatMenuModule
+} from '@angular/material/legacy-menu';
 import {
-	MatPaginatorModule
-} from '@angular/material/paginator';
+	MatLegacyPaginatorModule as MatPaginatorModule
+} from '@angular/material/legacy-paginator';
 import {
-	MatProgressBarModule
-} from '@angular/material/progress-bar';
+	MatLegacyProgressBarModule as MatProgressBarModule
+} from '@angular/material/legacy-progress-bar';
 import {
-	MatProgressSpinnerModule
-} from '@angular/material/progress-spinner';
+	MatLegacyProgressSpinnerModule as MatProgressSpinnerModule
+} from '@angular/material/legacy-progress-spinner';
 import {
-	MatRadioModule
-} from '@angular/material/radio';
+	MatLegacyRadioModule as MatRadioModule
+} from '@angular/material/legacy-radio';
 import {
-	MatSelectModule
-} from '@angular/material/select';
+	MatLegacySelectModule as MatSelectModule
+} from '@angular/material/legacy-select';
 import {
 
 	MatSidenavModule
 } from '@angular/material/sidenav';
 import {
-	MatSliderModule
-} from '@angular/material/slider';
+	MatLegacySliderModule as MatSliderModule
+} from '@angular/material/legacy-slider';
 import {
-	MatSnackBarModule
-} from '@angular/material/snack-bar';
+	MatLegacySnackBarModule as MatSnackBarModule
+} from '@angular/material/legacy-snack-bar';
 import {
 	MatSortModule
 } from '@angular/material/sort';
@@ -83,18 +83,18 @@ import {
 	MatStepperModule
 } from '@angular/material/stepper';
 import {
-	MatTableModule
-} from '@angular/material/table';
+	MatLegacyTableModule as MatTableModule
+} from '@angular/material/legacy-table';
 import { CdkTableModule } from '@angular/cdk/table';
 import {
-	MatTabsModule
-} from '@angular/material/tabs';
+	MatLegacyTabsModule as MatTabsModule
+} from '@angular/material/legacy-tabs';
 import {
 	MatToolbarModule
 } from '@angular/material/toolbar';
 import {
-	MatTooltipModule
-} from '@angular/material/tooltip';
+	MatLegacyTooltipModule as MatTooltipModule
+} from '@angular/material/legacy-tooltip';
 
 
 

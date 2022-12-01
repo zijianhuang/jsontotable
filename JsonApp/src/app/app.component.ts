@@ -4,7 +4,7 @@ import { AlertService, TextInputComponent, TextInputService } from 'nmce';
 import { APP_DI_CONFIG } from './app-config';
 import { TextareaDialogService } from './textarea.component';
 import { HttpClient } from '@angular/common/http';
-import { MatTabGroup } from '@angular/material/tabs';
+import { MatLegacyTabGroup as MatTabGroup } from '@angular/material/legacy-tabs';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
