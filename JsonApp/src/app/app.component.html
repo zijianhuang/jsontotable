@@ -21,8 +21,11 @@
 			<button mat-menu-item type="button" (click)="pasteFromClipboard()" matTooltip="Paste from Clipboard">
 				Paste from Clipboard
 			</button>
-			<button mat-menu-item type="button" (click)="getIndentedText()">
+			<button mat-menu-item type="button" (click)="copyIndentedJsonToClipboard()">
 				Copy Indented JSON to Clipboard
+			</button>
+			<button mat-menu-item type="button" (click)="copyHtmlToClipboard()">
+				Copy HTML to Clipboard
 			</button>
 		</mat-menu>
 
@@ -35,7 +38,7 @@
 		<mat-tab label="Table">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
 			<!--<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>-->
-			<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
+			<div [ngClass]="scroll?'table-container-scroll' : 'table-container'"  #treeTableRef>
 				<tree-table-cdk *ngIf="hackFlag" [data]="tableData"></tree-table-cdk>
 			</div>
 		</mat-tab>

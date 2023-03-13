@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ConfirmUploadService } from './confirmUpload.component';
 import { AlertService, TextInputComponent, TextInputService } from 'nmce';
 import { APP_DI_CONFIG } from './app-config';
@@ -14,21 +14,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 	loading = true;
 	title = 'JSON to Table';
 	currentFileName: string | undefined = '';
-	//tableData = [
-	//	{
-	//		id: 1, make: "Ford", model: "focus", reg: "P232 NJP", color: "white", serviceHistory: [
-	//			{ date: "01/02/2016", engineer: "Steve Boberson", actions: "Changed oli filter" },
-	//			{ date: "07/02/2017", engineer: "Martin Stevenson", actions: "Break light broken" },
-	//		]
-	//	},
-	//	{
-	//		id: 2, make: "BMW", model: "m3", reg: "W342 SEF", color: "red", serviceHistory: [
-	//			{ date: "22/05/2017", engineer: "Jimmy Brown", actions: "Aligned wheels" },
-	//			{ date: "11/02/2018", engineer: "Lotty Ferberson", actions: "Changed Oil" },
-	//			{ date: "04/04/2018", engineer: "Franco Martinez", actions: "Fixed Tracking" },
-	//		]
-	//	},
-	//];
 
 	tableData: Object = [];
 
@@ -44,6 +29,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 	scroll = false;
 
 	@ViewChild('tabGroup') tabGroup?: MatTabGroup;
+
+	@ViewChild('treeTableRef') treeTableRef?: ElementRef;
 
 	currentModuleName: string = 'table';
 
@@ -89,7 +76,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	loadJsonFromUrl() {
-		this.inputDialogService.open('Type or Paste URL', "URL").subscribe(
+		this.inputDialogService.open('Type or Paste URL', 'URL').subscribe(
 			url => {
 				if (url) {
 					this.httpClient.get(url, { responseType: 'json', headers: { 'ngsw-bypass': '', 'Cache-Control': 'no-cache' } }).subscribe({
@@ -186,9 +173,30 @@ export class AppComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	private copyJsonTextToClipboard(plainText: string) {
-		const type = 'text/plain';
-		const blob = new Blob([plainText], { type });
+	copyIndentedJsonToClipboard() {
+		const indented = JSON.stringify(this.tableData, null, '\t');
+		this.copyTextToClipboard(indented, 'text/plain');
+		//navigator.clipboard.writeText(indented).then(
+		//	d => this.alertService.success('Indented JSON text copied to clipboard')
+		//);
+	}
+
+	copyHtmlToClipboard() {
+		const htmlText = this.treeTableRef?.nativeElement.innerHTML;
+		const listener = (e: ClipboardEvent) => {
+			e.clipboardData?.setData('text/html', htmlText);
+			e.clipboardData?.setData('text/plain', htmlText);
+			e.preventDefault();
+			document.removeEventListener('copy', listener);
+		};
+		console.debug(htmlText);
+		document.addEventListener('copy', listener);
+		document.execCommand('copy');
+		this.alertService.success('Copied to clipboard');
+	}
+
+	private copyTextToClipboard(text: string, type: string) {
+		const blob = new Blob([text], { type });
 		const data = [new ClipboardItem({ [type]: blob })];
 		navigator.clipboard.write(data).then(
 			() => {
@@ -200,13 +208,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		);
 	};
 
-	getIndentedText() {
-		const indented = JSON.stringify(this.tableData, null, '\t');
-		this.copyJsonTextToClipboard(indented);
-		//navigator.clipboard.writeText(indented).then(
-		//	d => this.alertService.success('Indented JSON text copied to clipboard')
-		//);
-	}
+
 
 	toggleTable() {
 		if (this.tabGroup) {
