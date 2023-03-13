@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TreeTableBase } from './tree-table-base.directive';
 
 /**
@@ -11,4 +11,6 @@ import { TreeTableBase } from './tree-table-base.directive';
 	styleUrls: ['./tree-table-cdk.component.css']
 })
 export class TreeTableCdkComponent extends TreeTableBase {
+	@ViewChild('tableRef') tableRef?: ElementRef;
+
 }

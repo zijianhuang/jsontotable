@@ -5,6 +5,8 @@ import { APP_DI_CONFIG } from './app-config';
 import { TextareaDialogService } from './textarea.component';
 import { HttpClient } from '@angular/common/http';
 import { MatTabGroup } from '@angular/material/tabs';
+import { TreeTableComponent } from './tree-table.component';
+import { TreeTableCdkComponent } from './tree-table-cdk.component';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -30,7 +32,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	@ViewChild('tabGroup') tabGroup?: MatTabGroup;
 
-	@ViewChild('treeTableRef') treeTableRef?: ElementRef;
+	@ViewChild('treeTableRef') treeTableRef?: TreeTableCdkComponent;
 
 	currentModuleName: string = 'table';
 
@@ -182,7 +184,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	copyHtmlToClipboard() {
-		const htmlText = this.treeTableRef?.nativeElement.innerHTML;
+		const htmlText = this.treeTableRef?.tableRef?.nativeElement.innerHTML;
 		const listener = (e: ClipboardEvent) => {
 			e.clipboardData?.setData('text/html', htmlText);
 			e.clipboardData?.setData('text/plain', htmlText);
