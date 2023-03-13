@@ -186,22 +186,26 @@ export class AppComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	static copyPlainTextToClipboard(plainText: string) {
-		const listener = (e: ClipboardEvent) => {
-			e.clipboardData?.setData("text/plain", plainText);
-			e.preventDefault();
-			document.removeEventListener("copy", listener);
-		};
-
-		document.addEventListener("copy", listener);
-		document.execCommand("copy");
+	private copyJsonTextToClipboard(plainText: string) {
+		const type = 'text/plain';
+		const blob = new Blob([plainText], { type });
+		const data = [new ClipboardItem({ [type]: blob })];
+		navigator.clipboard.write(data).then(
+			() => {
+				this.alertService.success('Copied to clipboard');
+			},
+			() => {
+				this.alertService.warn('Something wrong');
+			}
+		);
 	};
 
 	getIndentedText() {
 		const indented = JSON.stringify(this.tableData, null, '\t');
-		navigator.clipboard.writeText(indented).then(
-			d => this.alertService.success('Indented JSON text copied to clipboard')
-		);
+		this.copyJsonTextToClipboard(indented);
+		//navigator.clipboard.writeText(indented).then(
+		//	d => this.alertService.success('Indented JSON text copied to clipboard')
+		//);
 	}
 
 	toggleTable() {
