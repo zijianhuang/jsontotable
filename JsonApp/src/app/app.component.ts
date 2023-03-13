@@ -185,16 +185,37 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	copyHtmlToClipboard() {
 		const htmlText = this.treeTableRef?.tableRef?.nativeElement.innerHTML;
-		const listener = (e: ClipboardEvent) => {
-			e.clipboardData?.setData('text/html', htmlText);
-			e.clipboardData?.setData('text/plain', htmlText);
-			e.preventDefault();
-			document.removeEventListener('copy', listener);
-		};
-		console.debug(htmlText);
-		document.addEventListener('copy', listener);
-		document.execCommand('copy');
-		this.alertService.success('Copied to clipboard');
+		//const listener = (e: ClipboardEvent) => {
+		//	e.clipboardData?.setData('text/html', htmlText);//the operation may fail if the memory left in the OS is not enough.
+		//	e.clipboardData?.setData('text/plain', htmlText); //working, but deprecated in Web browsers
+		//	e.preventDefault();
+		//	document.removeEventListener('copy', listener);
+		//};
+		//console.debug(htmlText);
+		//document.addEventListener('copy', listener);
+		//document.execCommand('copy');
+
+//		this.copyTextToClipboard(htmlText, 'text/html');
+		//		this.alertService.success('Copied to clipboard');
+		const clipboardItem = new ClipboardItem({ //thanks to https://www.nikouusitalo.com/blog/why-isnt-clipboard-write-copying-my-richtext-html/
+			'text/plain': new Blob(
+				[htmlText],
+				{ type: 'text/plain' }
+			),
+			'text/html': new Blob(
+				[htmlText],
+				{ type: 'text/html' }
+			),
+		});
+
+		navigator.clipboard.write([clipboardItem]).then(
+			() => {
+				this.alertService.success('Copied to clipboard');
+			},
+			() => {
+				this.alertService.warn('Something wrong');
+			}
+		);
 	}
 
 	private copyTextToClipboard(text: string, type: string) {
