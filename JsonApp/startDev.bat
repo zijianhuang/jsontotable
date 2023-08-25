@@ -1,1 +1,1 @@
-dotnet-serve -d C:\VSProjects\Fonlow\Json2Table\jtngdist\json2table\ -p 6200
+dotnet-serve -d C:\VSProjects\Fonlow\JsonToTable\jtngdist\json2table\ -p 6200

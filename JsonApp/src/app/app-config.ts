@@ -5,4 +5,8 @@ export class APP_DI_CONFIG {
 
 	static readonly buildTime = AppConfigConstants.buildTime;
 
+	/**
+	 * Initialized in app-root component, by injected DIALOG_ACTIONS_ALIGN, provided in app module.
+	 */
+	static DialogActionsAlign: 'start' | 'center' | 'end' = 'end';
 }

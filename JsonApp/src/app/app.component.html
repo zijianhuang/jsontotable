@@ -1,5 +1,5 @@
 <div class="fixed-top">
-	<mat-toolbar #toolbar fxLayoutGap="1em">
+	<mat-toolbar #toolbar class="fx-column-gap-1">
 		<mat-button-toggle-group #menuToggleGroup #group="matButtonToggleGroup" [value]="currentModuleName">
 			<mat-button-toggle (click)="toggleTable()" value="table">
 				<span>Table</span>
@@ -21,11 +21,16 @@
 			<button mat-menu-item type="button" (click)="pasteFromClipboard()" matTooltip="Paste from Clipboard">
 				Paste from Clipboard
 			</button>
+			<mat-divider></mat-divider>
 			<button mat-menu-item type="button" (click)="copyIndentedJsonToClipboard()">
 				Copy Indented JSON to Clipboard
 			</button>
 			<button mat-menu-item type="button" (click)="copyHtmlToClipboard()">
 				Copy HTML to Clipboard
+			</button>
+			<mat-divider></mat-divider>
+			<button mat-menu-item type="button" (click)="about()">
+				About
 			</button>
 		</mat-menu>
 

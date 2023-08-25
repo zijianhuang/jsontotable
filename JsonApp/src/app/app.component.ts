@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ConfirmUploadService } from './confirmUpload.component';
-import { AlertService, TextInputComponent, TextInputService } from 'nmce';
+import { AlertService, TextInputComponent, TextInputService, DIALOG_ACTIONS_ALIGN } from 'nmce';
 import { APP_DI_CONFIG } from './app-config';
 import { TextareaDialogService } from './textarea.component';
 import { HttpClient } from '@angular/common/http';
@@ -42,7 +42,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 		private textareaDialogService: TextareaDialogService,
 		private inputDialogService: TextInputService,
 		private httpClient: HttpClient,
+		@Inject(DIALOG_ACTIONS_ALIGN) public actionsAlign: 'start' | 'center' | 'end',
+
 	) {
+		APP_DI_CONFIG.DialogActionsAlign = actionsAlign;
 		this.alertService.initOnce();
 		this.displayNewVersions();
 	}
@@ -231,8 +234,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 		);
 	};
 
-
-
 	toggleTable() {
 		if (this.tabGroup) {
 			this.tabGroup.selectedIndex = 0;
@@ -243,5 +244,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 		if (this.tabGroup) {
 			this.tabGroup.selectedIndex = 1;
 		}
+	}
+
+	about() {
+		window.open('https://jsontotable.fonlow.org', '_blank');
 	}
 }

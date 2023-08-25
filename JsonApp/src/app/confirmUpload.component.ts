@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { NgxDropzoneChangeEvent } from 'ngx-dropzone';
 import { AlertService, ConfirmService } from 'nmce';
 import { Observable } from 'rxjs';
+import { APP_DI_CONFIG } from './app-config';
 
 /**
  * Use HTML File API to load a local file, and define the description. Return UploadBrief.
@@ -27,6 +28,9 @@ export class ConfirmUploadComponent {
 
 	acceptFilter = '';
 
+	get actionsAlign() {
+		return APP_DI_CONFIG.DialogActionsAlign;
+	}
 	constructor(@Inject(MAT_DIALOG_DATA) data: { title: string, body: string, acceptFilter?: string },
 		public dialogRef: MatDialogRef<ConfirmUploadComponent, UploadBrief>,
 		private confirmService: ConfirmService,

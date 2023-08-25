@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { ConfirmUploadComponent, ConfirmUploadService } from './confirmUpload.component';
 import { NGMDModule } from './ngmd.module';
 import { TreeTableComponent } from './tree-table.component';
-import { Nmce_UI_ServicesModule, NmceComponentsModule } from 'nmce';
+import { DIALOG_ACTIONS_ALIGN, NmceComponentsModule, Nmce_UI_ServicesModule } from 'nmce';
 import { TreeTableCdkComponent } from './tree-table-cdk.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -39,11 +38,16 @@ import { HttpClientModule } from '@angular/common/http';
 			registrationStrategy: 'registerImmediately'
 		}),
 		NGMDModule,
-		FlexLayoutModule,
 		Nmce_UI_ServicesModule, NmceComponentsModule,
 		NgxDropzoneModule,
 	],
-	providers: [ConfirmUploadService, TextareaDialogService,],
+	providers: [ConfirmUploadService, TextareaDialogService,
+		//nmce dialogs will use this.
+		{
+			provide: DIALOG_ACTIONS_ALIGN,
+			useValue: 'end'
+		},
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
