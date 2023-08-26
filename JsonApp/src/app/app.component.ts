@@ -1,12 +1,13 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ConfirmUploadService } from './confirmUpload.component';
-import { AlertService, TextInputComponent, TextInputService, DIALOG_ACTIONS_ALIGN } from 'nmce';
-import { APP_DI_CONFIG } from './app-config';
-import { TextareaDialogService } from './textarea.component';
 import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { MatTabGroup } from '@angular/material/tabs';
-import { TreeTableComponent } from './tree-table.component';
+import { AlertService, DIALOG_ACTIONS_ALIGN, TextInputService } from 'nmce';
+import { APP_DI_CONFIG } from './app-config';
+import { ConfirmUploadService } from './confirmUpload.component';
+import { TextareaDialogService } from './textarea.component';
 import { TreeTableCdkComponent } from './tree-table-cdk.component';
+import { ActivatedRoute } from '@angular/router';
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -34,7 +35,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	@ViewChild('treeTableRef') treeTableRef?: TreeTableCdkComponent;
 
+	@ViewChild('menuTrigger') mainMenuTrigger?: MatMenuTrigger;
+
 	currentModuleName: string = 'table';
+
+	url : string | null = '';
 
 	constructor(public confirmUploadService: ConfirmUploadService,
 		private ref: ChangeDetectorRef,
@@ -42,15 +47,28 @@ export class AppComponent implements OnInit, AfterViewInit {
 		private textareaDialogService: TextareaDialogService,
 		private inputDialogService: TextInputService,
 		private httpClient: HttpClient,
+		private activatedRoute: ActivatedRoute,
 		@Inject(DIALOG_ACTIONS_ALIGN) public actionsAlign: 'start' | 'center' | 'end',
 
 	) {
 		APP_DI_CONFIG.DialogActionsAlign = actionsAlign;
 		this.alertService.initOnce();
 		this.displayNewVersions();
+
+
 	}
 
 	ngOnInit() {
+		this.activatedRoute.queryParams
+			.subscribe(params => {
+				this.url = params['url'];
+				console.debug('url: ' + this.url);
+				if (this.url) {
+					this.loadFromUrl(this.url);
+					this.url = '';
+				}
+			}
+			);
 	}
 
 	ngAfterViewInit(): void {
@@ -59,6 +77,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 			this.tabGroup.selectedIndex = 0;
 			console.debug('current tab should be table.');
 		}
+
+		if (!this.currentFileName && !this.url) {
+			this.mainMenuTrigger?.openMenu();
+		};
 	}
 
 	loadJsonFile() {
@@ -81,22 +103,26 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	loadJsonFromUrl() {
-		this.inputDialogService.open('Type or Paste URL', 'URL').subscribe(
+		this.inputDialogService.open(`Type or Paste URL allowing origin ${location.hostname}`, 'URL').subscribe(
 			url => {
-				if (url) {
-					this.httpClient.get(url, { responseType: 'json', headers: { 'ngsw-bypass': '', 'Cache-Control': 'no-cache' } }).subscribe({
-						next: data => {
-							this.assignObject(data);
-							this.currentFileName = 'URL';
-						},
-						error: error => {
-							this.alertService.error(error);
-						}
-					});
-
-				}
+				this.loadFromUrl(url);
 			}
 		);
+	}
+
+	private loadFromUrl(url: string) {
+		if (url) {
+			this.httpClient.get(url, { responseType: 'json', headers: { 'ngsw-bypass': '', 'Cache-Control': 'no-cache' } }).subscribe({
+				next: data => {
+					this.assignObject(data);
+					this.currentFileName = 'URL';
+				},
+				error: error => {
+					this.alertService.error(error);
+				}
+			});
+
+		}
 	}
 
 	private assignText(s: string) {
@@ -134,16 +160,16 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	private displayNewVersions() {
-		const oldHtmlVersion = localStorage['APS.JsonViewer.HtmlVersion'];
+		const oldHtmlVersion = localStorage['Fonlow.JsonViewer.HtmlVersion'];
 		if (oldHtmlVersion !== APP_DI_CONFIG.version) {
 			this.htmlVersion = APP_DI_CONFIG.version;
-			localStorage['APS.JsonViewer.HtmlVersion'] = APP_DI_CONFIG.version;
+			localStorage['Fonlow.JsonViewer.HtmlVersion'] = APP_DI_CONFIG.version;
 		}
 
-		const oldHtmlBuildTime = localStorage['APS.JsonViewer.HtmlBuildTime'];
+		const oldHtmlBuildTime = localStorage['Fonlow.JsonViewer.HtmlBuildTime'];
 		if (oldHtmlBuildTime !== APP_DI_CONFIG.buildTime?.toString()) {
 			this.htmlBuildTime = APP_DI_CONFIG.buildTime;
-			localStorage['APS.JsonViewer.HtmlBuildTime'] = APP_DI_CONFIG.buildTime;
+			localStorage['Fonlow.JsonViewer.HtmlBuildTime'] = APP_DI_CONFIG.buildTime;
 		}
 
 		if (this.htmlBuildTime || this.htmlVersion) {

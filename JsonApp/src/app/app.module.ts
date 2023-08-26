@@ -15,6 +15,12 @@ import { JsonTreeComponent } from './json-tree.component';
 import { TextareaComponent, TextareaDialogService } from './textarea.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+
+const routes: Routes = [
+
+];
 
 @NgModule({
 	declarations: [
@@ -29,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
 		FormsModule,
 		BrowserModule,
 		BrowserAnimationsModule,
+		AppRoutingModule,
 		HttpClientModule,
 		ServiceWorkerModule.register(document.baseURI + 'ngsw-worker.js', {
 			enabled: environment.production,
@@ -41,12 +48,15 @@ import { HttpClientModule } from '@angular/common/http';
 		Nmce_UI_ServicesModule, NmceComponentsModule,
 		NgxDropzoneModule,
 	],
+
 	providers: [ConfirmUploadService, TextareaDialogService,
 		//nmce dialogs will use this.
 		{
 			provide: DIALOG_ACTIONS_ALIGN,
 			useValue: 'end'
 		},
+
+		//ActivatedRoute,
 	],
 	bootstrap: [AppComponent]
 })
