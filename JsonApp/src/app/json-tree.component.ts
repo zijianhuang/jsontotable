@@ -1,10 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import JSONFormatter from 'json-formatter-js';
 
 
 @Component({
 	selector: 'json-tree',
 	templateUrl: './json-tree.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class JsonTreeComponent implements AfterViewInit {
 	private _data: any;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { TreeTableBase } from './tree-table-base.directive';
 
 /**
@@ -8,7 +8,9 @@ import { TreeTableBase } from './tree-table-base.directive';
 @Component({
 	selector: 'tree-table',
 	templateUrl: './tree-table.component.html',
-	styleUrls: ['./tree-table.component.css']
+	styleUrls: ['./tree-table.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class TreeTableComponent extends TreeTableBase {
 

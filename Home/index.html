@@ -2,29 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JASON to Tables</title>
+    <title>JSON to Tables</title>
     <base href="/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <meta name="description" content="Display JSON data as tables" />
+
 </head>
 
-<body>
-    <p>Display JSON data with a lot arraries which are better presented as tables.</p>
-    <p>
-        Json2Table is a <a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps">PWA</a> which you can install on your device. JSON data loaded is transformed entirely within your browser, and none of your JSON data is ever transfered back to the app origin or elsewhere.
-    </p>
-    <div class="text-center">
-        <a href="/app/" class="btn btn-primary">Launch App</a>
-    </div>
-    
-    Features:
-    <ul>
-        <li>Display with nested tables.</li>
-        <li>Display as collapsible tree.</li>
-        <li>Load JSON from local file.</li>
-        <li>Load JSON from URL which allows origin of the app.</li>
-        <li>Paste JSON from clipboard.</li>
-        <li>Copy indented JSON text to clipboard</li>
-        <li>Copy HTML content/tags of the table view to clipboard.</li>
-    </ul>
+<body class="container">
+    <main class="flex-shrink-0">
+        <p></p>
+        <p>
+            Json2Table is a <a href="https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps" target="_blank">PWA</a> which displays JSON data containing a lot arrays that are better presented as tables.
+            And you may install the app on your device. JSON data loaded is transformed entirely within your browser, and none of your JSON data is ever transfered back to the app origin or elsewhere.
+        </p>
+        <div class="text-center">
+            <a href="/app/" target="_blank" class="btn btn-primary">Launch App</a>
+        </div>
+
+        <strong>Features:</strong>
+        <ul>
+            <li>
+                Display JSON data
+                <ul>
+                    <li>As nested tables.</li>
+                    <li>As a collapsible tree.</li>
+                </ul>
+            </li>
+            <li>
+                Load JSON data
+                <ul>
+                    <li>From local JSON file.</li>
+                    <li>From URL which returns JSON data and allows origin of the app.</li>
+                    <li>Through <a href="https://jsontotable.fonlow.org/app/?url=https:%2F%2Ffonlow.com%2Fbyron%2Fdata%2FByron.json" target="_blank">URL query</a>.</li>
+                    <li>From clipboard.</li>
+                </ul>
+            </li>
+            <li>
+                Export
+                <ul>
+                    <li>Indented JSON text to clipboard</li>
+                    <li>HTML content/tags of the table view to clipboard.</li>
+                </ul>
+            </li>
+        </ul>
+    </main>
+
+
+    <footer class="footer fixed-bottom bg-body-tertiary mt-auto py-3">
+        <div class="container">
+            <span class="text-body-secondary">Copyright © 2023 Fonlow. All rights reserved.</span>
+        </div>
+    </footer>
+
 </body>
 </html>

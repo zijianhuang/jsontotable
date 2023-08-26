@@ -66,6 +66,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 				if (this.url) {
 					this.loadFromUrl(this.url);
 					this.url = '';
+					if (this.mainMenuTrigger?.menuOpened) {
+						this.mainMenuTrigger.closeMenu();
+					}
 				}
 			}
 			);
@@ -116,6 +119,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 				next: data => {
 					this.assignObject(data);
 					this.currentFileName = 'URL';
+					this.ref.detectChanges();
 				},
 				error: error => {
 					this.alertService.error(error);

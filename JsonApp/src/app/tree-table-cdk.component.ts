@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { TreeTableBase } from './tree-table-base.directive';
 
 /**
@@ -8,7 +8,8 @@ import { TreeTableBase } from './tree-table-base.directive';
 @Component({
 	selector: 'tree-table-cdk',
 	templateUrl: './tree-table-cdk.component.html',
-	styleUrls: ['./tree-table-cdk.component.css']
+	styleUrls: ['./tree-table-cdk.component.css'],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeTableCdkComponent extends TreeTableBase {
 	@ViewChild('tableRef') tableRef?: ElementRef;
