@@ -3,6 +3,7 @@ import { Directive, Input, OnInit } from '@angular/core';
 export interface TableColumnDef {
 	columnDef: string,
 	header: string,
+	type: string,
 	cell: (element: any) => void,
 	subTableColumnDefs?: TableColumnDef[]
 }
@@ -128,12 +129,35 @@ export class TreeTableBase implements OnInit {
 				const fieldName = k;
 				const value: any = v;
 				const type = typeof value;
-				if (['string', 'number', 'date', 'bigint', 'boolean'].indexOf(type) >= 0) {
+				if (['number', 'bigint', 'boolean'].indexOf(type) >= 0) {
 					tableColumnDefs.push({
 						columnDef: fieldName,
 						header: fieldName,
+						type: type,
 						cell: (element: any) => element[fieldName],
-					})
+					});
+				}
+				else if (type == 'string') {
+					let t: string = type;
+					const a = Date.parse(value);
+					if (!isNaN(a)) {
+						t = 'date';
+					}
+
+					tableColumnDefs.push({
+						columnDef: fieldName,
+						header: fieldName,
+						type: t,
+						cell: (element: any) => element[fieldName],
+					});
+				}
+				else if (value instanceof Date) {
+					tableColumnDefs.push({
+						columnDef: fieldName,
+						header: fieldName,
+						type: 'date',
+						cell: (element: any) => element[fieldName],
+					});
 				}
 				else if (Array.isArray(value)) {
 					const subTableColumnDefs: TableColumnDef[] = [];
@@ -141,6 +165,7 @@ export class TreeTableBase implements OnInit {
 					tableColumnDefs.push({
 						columnDef: fieldName,
 						header: fieldName,
+						type: type,
 						cell: (element: any) => element[fieldName],
 						subTableColumnDefs: subTableColumnDefs
 					});
@@ -151,12 +176,29 @@ export class TreeTableBase implements OnInit {
 					tableColumnDefs.push({
 						columnDef: fieldName,
 						header: fieldName,
+						type: type,
 						cell: (element: any) => element[fieldName],
 						subTableColumnDefs: subTableColumnDefs
 					});
 				}
 			}
 
+		}
+	}
+
+	getType(d: any) {
+		return typeof d;
+	}
+
+	getCellClass(t: string) {
+		switch (t) {
+			case 'string': return 'string-node';
+			case 'number': return 'number-node';
+			case 'bigint': return 'bigint-node';
+			case 'boolean': return 'bool-node';
+			case 'date': return 'date-node';
+			default:
+				return 'any-node';
 		}
 	}
 }

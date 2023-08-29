@@ -4,7 +4,7 @@
 			<th cdk-header-cell *matHeaderCellDef>
 				{{column.header}}
 			</th>
-			<td cdk-cell *matCellDef="let row">
+			<td cdk-cell *matCellDef="let row" [ngClass]="getCellClass(column.type)">
 				{{column.cell(row)}}
 			</td>
 		</ng-container>

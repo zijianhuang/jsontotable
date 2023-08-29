@@ -49,3 +49,27 @@ div.table-container-scroll {
 .header-less-tabs .mat-mdc-tab-header {
 	display: none;
 }
+
+.string-node{
+	color: darkblue;
+}
+
+.number-node{
+	color: green;
+}
+
+.date-node{
+	color: blue;
+}
+
+.bigint-node{
+	color: forestgreen;
+}
+
+.bool-node{
+	color: brown;
+}
+
+.any-node{
+	color: black;
+}
