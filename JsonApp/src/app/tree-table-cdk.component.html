@@ -18,7 +18,7 @@
 
 		<ng-container *ngFor="let fn of arrayFieldNames; let i = index" [matColumnDef]="'expandedArrayDetail' + i">
 			<td cdk-cell *matCellDef="let element" [attr.colspan]="getNonArrayFieldCount(element[fn])">
-				<label class="nested-array-field-name">{{fn}}</label>
+				<label class="nested-array-field-name">{{(element[fn].length==0 ? fn : fn + '['+element[fn].length+']' )}}</label>
 				<tree-table-cdk [data]="element[fn]"></tree-table-cdk>
 			</td>
 		</ng-container>

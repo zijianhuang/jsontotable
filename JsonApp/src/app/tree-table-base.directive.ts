@@ -63,7 +63,7 @@ export class TreeTableBase implements OnInit {
 	 */
 	displayedColumns: string[] = [];
 	/*
-	 * array fields of the row object
+	 * names of array fields of the row object
 	 */
 	arrayFieldNames: string[] = [];
 
