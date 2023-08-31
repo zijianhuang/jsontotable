@@ -73,3 +73,7 @@ div.table-container-scroll {
 .any-node{
 	color: black;
 }
+
+html, body {
+	overscroll-behavior-y: none;
+}

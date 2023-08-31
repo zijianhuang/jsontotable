@@ -8,6 +8,8 @@ import { ConfirmUploadService } from './confirmUpload.component';
 import { TextareaDialogService } from './textarea.component';
 import { TreeTableCdkComponent } from './tree-table-cdk.component';
 import { ActivatedRoute } from '@angular/router';
+import { LocationStrategy } from '@angular/common';
+
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
@@ -49,8 +51,15 @@ export class AppComponent implements OnInit, AfterViewInit {
 		private httpClient: HttpClient,
 		private activatedRoute: ActivatedRoute,
 		@Inject(DIALOG_ACTIONS_ALIGN) public actionsAlign: 'start' | 'center' | 'end',
-
+		private locationStrategy: LocationStrategy,
 	) {
+		//goback prevention
+		history.pushState(null, '', window.location.href);
+		this.locationStrategy.onPopState(() => {
+			history.pushState(null, '', window.location.href);
+			console.info('This app prevents goback.');
+		});
+
 		APP_DI_CONFIG.DialogActionsAlign = actionsAlign;
 		this.alertService.initOnce();
 		this.displayNewVersions();
