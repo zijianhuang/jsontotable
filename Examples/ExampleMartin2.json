@@ -1,0 +1,40 @@
+{
+    "page": 1,
+    "count": 5,
+    "pageSize": 5,
+    "totalCount": 10,
+    "hasNextPage": true,
+    "hasPriorPage": false,
+    "items": [
+        {
+            "id": "00000000-0000-0000-8000-000000000008",
+            "name": "Upshaw",
+            "contactPersonName": null,
+            "registrationDate": "2022-01-07"
+        },
+        {
+            "id": "00000000-0000-0000-8000-000000000010",
+            "name": "Swayze",
+            "contactPersonName": null,
+            "registrationDate": "2023-01-29"
+        },
+        {
+            "id": "00000000-0000-0000-8000-000000000001",
+            "name": "Pavlova",
+            "contactPersonName": "Anna",
+            "registrationDate": "2021-01-01"
+        },
+        {
+            "id": "00000000-0000-0000-8000-000000000003",
+            "name": "Nureyev",
+            "contactPersonName": null,
+            "registrationDate": "2022-03-02"
+        },
+        {
+            "id": "00000000-0000-0000-8000-000000000009",
+            "name": "Kelly",
+            "contactPersonName": null,
+            "registrationDate": "2023-01-12"
+        }
+    ]
+}

@@ -77,3 +77,7 @@ div.table-container-scroll {
 html, body {
 	overscroll-behavior-y: none;
 }
+
+.cell-font {
+	font-family: Consolas, monospace, Courier, Courier New;
+}

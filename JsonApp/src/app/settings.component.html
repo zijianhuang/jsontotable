@@ -1,0 +1,42 @@
+<ng-template [ngIf]="showTitle" [ngIfElse]="groups">
+	<div *ngIf="showTitle" mat-dialog-title class="block-items-gap-1">
+		<button  mat-mini-fab color="any" matTooltip="Back" mat-dialog-close>
+			<mat-icon>arrow_back_ios</mat-icon>
+		</button>
+		<span i18n>View Settings</span>
+	</div>
+	<mat-dialog-content>
+		<ng-container *ngTemplateOutlet="groups"></ng-container>
+	</mat-dialog-content>
+</ng-template>
+<!-- not to have dialog directives when being rendered in another dialog -->
+<ng-template #groups>
+	<p></p>
+	<div>
+		<fieldset class="fx-80pc-width">
+			<legend>Poem View</legend>
+			<div class="fx-layout-column">
+				<mat-checkbox [(ngModel)]="poemViewerSettings.showAnnotations" i18n>Show Annotations By Default</mat-checkbox>
+				<mat-checkbox [(ngModel)]="poemViewerSettings.showTags" i18n>Show Tags</mat-checkbox>
+				<mat-checkbox [(ngModel)]="poemViewerSettings.showDate" i18n>Show Publish Date</mat-checkbox>
+				<mat-checkbox [(ngModel)]="poemViewerSettings.showTitle" i18n>Show Title</mat-checkbox>
+				<mat-checkbox [(ngModel)]="poemViewerSettings.showAlbums" i18n>Show Albums</mat-checkbox>
+				<mat-checkbox [(ngModel)]="poemViewerSettings.hideSideNavAfterSelect" i18n>Hide Sidebar After Selecting</mat-checkbox>
+			</div>
+		</fieldset>
+	</div>
+	<p></p>
+	<div>
+		<fieldset class="fx-80pc-width">
+			<legend>Poem View in Album</legend>
+			<div class="fx-layout-column">
+				<mat-checkbox [(ngModel)]="albumPoemViewerSettings.showAnnotations" i18n>Show Annotations By Default</mat-checkbox>
+				<mat-checkbox [(ngModel)]="albumPoemViewerSettings.showTags" i18n>Show Tags</mat-checkbox>
+				<mat-checkbox [(ngModel)]="albumPoemViewerSettings.showDate" i18n>Show Publish Date</mat-checkbox>
+			</div>
+		</fieldset>
+	</div>
+	<p></p>
+</ng-template>
+
+
