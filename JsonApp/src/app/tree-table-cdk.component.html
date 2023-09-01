@@ -1,4 +1,4 @@
-<div #tableRef>
+<div *ngIf="data" #tableRef>
 	<table *ngIf="data.length>0" cdk-table [dataSource]="data" class="cdk-elevation-z8" multiTemplateDataRows>
 		<ng-container *ngFor="let column of rootTableColumnDefs" [matColumnDef]="column.columnDef">
 			<th cdk-header-cell *matHeaderCellDef>

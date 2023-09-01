@@ -45,15 +45,15 @@ export class TreeTableBase implements OnInit {
 			this.GetTableColumnDef(this._data, this.rootTableColumnDefs);
 			this.rootTableNonArrayColumnCount = this.rootTableColumnDefs.filter(d => d.type != 'array').length;
 
-			console.debug('original data is ' + JSON.stringify(obj));
-			console.debug('transformed data is ' + JSON.stringify(this._data));
-			console.debug('rootTableColumnDefs is ' + JSON.stringify(this.rootTableColumnDefs));
+			//console.debug('original data is ' + JSON.stringify(obj));
+			//console.debug('transformed data is ' + JSON.stringify(this._data));
+			//console.debug('rootTableColumnDefs is ' + JSON.stringify(this.rootTableColumnDefs));
 
 			this.displayedColumns = this.rootTableColumnDefs.filter(d => !d.subTableColumnDefs).map(d => d.header);
 			this.arrayFieldNames = this.getArrayFieldNames(this._data[0]);
-			console.debug('arrayFieldNames: ' + this.arrayFieldNames.join(', '));
+			//console.debug('arrayFieldNames: ' + this.arrayFieldNames.join(', '));
 			this.objectFieldNames = this.getObjectFieldNames(this._data[0]);
-			console.debug('objectFieldNames: ' + this.objectFieldNames.join(', '));
+			//console.debug('objectFieldNames: ' + this.objectFieldNames.join(', '));
 		}
 	}
 
