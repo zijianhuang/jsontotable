@@ -55,7 +55,7 @@ div.table-container-scroll {
 }
 
 .number-node{
-	color: green;
+	color: darkgreen;
 }
 
 .date-node{
@@ -78,6 +78,6 @@ html, body {
 	overscroll-behavior-y: none;
 }
 
-/*.cell-font {
+.cell-font {
 	font-family: Consolas, monospace, Courier, Courier New;
-}*/
+}
