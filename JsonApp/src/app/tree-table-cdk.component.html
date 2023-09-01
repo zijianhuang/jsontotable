@@ -17,8 +17,8 @@
 		</ng-container>
 
 		<ng-container *ngFor="let fn of arrayFieldNames; let i = index" [matColumnDef]="'expandedArrayDetail' + i">
-			<td cdk-cell *matCellDef="let element" [attr.colspan]="getNonArrayFieldCount(element[fn])">
-				<label class="nested-array-field-name">{{(element[fn].length==0 ? fn : fn + '['+element[fn].length+']' )}}</label>
+			<td cdk-cell *matCellDef="let element" [attr.colspan]="rootTableNonArrayColumnCount">
+				<label class="nested-array-field-name">{{(element[fn].length==0 ? fn : fn + '('+element[fn].length+')' )}}</label>
 				<tree-table-cdk [data]="element[fn]"></tree-table-cdk>
 			</td>
 		</ng-container>
@@ -29,11 +29,12 @@
 		</ng-container>
 
 		<ng-container *ngFor="let fn of arrayFieldNames; let i = index">
-			<tr cdk-row *matRowDef="let row; columns: ['expandedArrayDetail'+i]" class="example-detail-row"></tr>
+			<tr cdk-row *matRowDef="let row; columns: ['expandedArrayDetail'+i]"></tr>
 		</ng-container>
 
+		<!-- not really running to here? -->
 		<ng-container *ngFor="let fn of objectFieldNames; let i = index">
-			<tr cdk-row *matRowDef="let row; columns: ['expandedObjectDetail'+i]" class="example-detail-row"></tr>
+			<tr cdk-row *matRowDef="let row; columns: ['expandedObjectDetail'+i]"></tr>
 		</ng-container>
 
 	</table>

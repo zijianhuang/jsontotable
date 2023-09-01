@@ -43,6 +43,7 @@ export class TreeTableBase implements OnInit {
 			}
 
 			this.GetTableColumnDef(this._data, this.rootTableColumnDefs);
+			this.rootTableNonArrayColumnCount = this.rootTableColumnDefs.filter(d => d.type != 'array').length;
 
 			console.debug('original data is ' + JSON.stringify(obj));
 			console.debug('transformed data is ' + JSON.stringify(this._data));
@@ -55,6 +56,8 @@ export class TreeTableBase implements OnInit {
 			console.debug('objectFieldNames: ' + this.objectFieldNames.join(', '));
 		}
 	}
+
+	rootTableNonArrayColumnCount = 0;
 
 	private readonly basicTypes = ['string', 'number', 'date', 'bigint', 'boolean'];
 
@@ -78,6 +81,11 @@ export class TreeTableBase implements OnInit {
 
 	}
 
+	/**
+	 * The count will be used for the colspan of silbling array properties
+	 * @param obj
+	 * @returns
+	 */
 	getNonArrayFieldCount(obj: any) {
 		if (obj) {
 			const entries = Object.entries(obj);
@@ -165,7 +173,7 @@ export class TreeTableBase implements OnInit {
 					tableColumnDefs.push({
 						columnDef: fieldName,
 						header: fieldName,
-						type: type,
+						type: 'array',
 						cell: (element: any) => element[fieldName],
 						subTableColumnDefs: subTableColumnDefs
 					});
