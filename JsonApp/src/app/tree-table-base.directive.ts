@@ -143,7 +143,7 @@ export class TreeTableBase implements OnInit {
 			return false
 		}, set);
 
-		return unionArray;
+		return unionArray.filter(d => d.type!='null');
 	}
 
 	/**
@@ -203,7 +203,9 @@ export class TreeTableBase implements OnInit {
 						cell: (element: any) => element[fieldName],
 						subTableColumnDefs: subTableColumnDefs
 					});
-				} else if (['null', 'undefined'].indexOf(type) < 0) {
+				} else if (v == null) { //null or undefined
+					//do nothing
+				} else {
 					const subTableColumnDefs: TableColumnDef[] = [];
 					const objAsArray = [value];
 					this.GetTableColumnDef(objAsArray, subTableColumnDefs);
