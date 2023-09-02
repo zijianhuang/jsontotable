@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { MatTabGroup } from '@angular/material/tabs';
-import { AlertService, DIALOG_ACTIONS_ALIGN, TextInputService } from 'nmce';
+import { AlertService, DIALOG_ACTIONS_ALIGN, TextInputService, WaitService } from 'nmce';
 import { APP_DI_CONFIG } from './app-config';
 import { ConfirmUploadService } from './confirmUpload.component';
 import { TextareaDialogService } from './textarea.component';
@@ -52,6 +52,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		private activatedRoute: ActivatedRoute,
 		@Inject(DIALOG_ACTIONS_ALIGN) public actionsAlign: 'start' | 'center' | 'end',
 		private locationStrategy: LocationStrategy,
+		private waitService: WaitService,
 	) {
 		//goback prevention
 		history.pushState(null, '', window.location.href);
@@ -161,10 +162,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 	}
 
 	private rerender() {
+		this.waitService.setWait({ loading: true });
+		this.ref.detectChanges();
 		this.usedOnce = true;
 		this.hackFlag = false; //https://stackoverflow.com/questions/50383003/how-to-re-render-a-component-manually-angular-5
 		this.ref.detectChanges(); //hacky, but simple and works.
 		this.hackFlag = true;
+		this.ref.detectChanges();
+		this.waitService.setWait({ loading: false });
 		this.ref.detectChanges();
 	}
 

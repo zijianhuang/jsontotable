@@ -42,7 +42,8 @@ export class TreeTableBase implements OnInit {
 				this._data = obj;
 			}
 
-			this.GetTableColumnDef(this._data, this.rootTableColumnDefs);
+			//this.GetTableColumnDef(this._data, this.rootTableColumnDefs);
+			this.rootTableColumnDefs = this.GetTableColumnDefFromRows(this._data);
 			this.rootTableNonArrayColumnCount = this.rootTableColumnDefs.filter(d => d.type != 'array').length;
 
 			//console.debug('original data is ' + JSON.stringify(obj));
@@ -123,6 +124,28 @@ export class TreeTableBase implements OnInit {
 		return [];
 	}
 
+	private GetTableColumnDefFromRows(rows: any[]) {
+		const defs = new Array<TableColumnDef[]>(rows.length);
+		for (var i = 0; i < rows.length; i++) {
+			defs[i] = [];
+			const d = rows[i];
+			this.GetTableColumnDef([d], defs[i]);
+		}
+
+		const merged = defs.flat();
+
+		let set = new Set()
+		let unionArray = merged.filter((item) => {
+			if (!set.has(item.columnDef)) {
+				set.add(item.columnDef)
+				return true
+			}
+			return false
+		}, set);
+
+		return unionArray;
+	}
+
 	/**
 	 * Generate column definitions of data, recuisively.
 	 * @param data
@@ -168,8 +191,11 @@ export class TreeTableBase implements OnInit {
 					});
 				}
 				else if (Array.isArray(value)) {
-					const subTableColumnDefs: TableColumnDef[] = [];
-					this.GetTableColumnDef(value, subTableColumnDefs);
+					//const subTableColumnDefs: TableColumnDef[] = [];
+					//this.GetTableColumnDef(value, subTableColumnDefs);
+
+					const subTableColumnDefs = this.GetTableColumnDefFromRows(value);
+
 					tableColumnDefs.push({
 						columnDef: fieldName,
 						header: fieldName,
