@@ -55,7 +55,7 @@
 		<mat-tab label="Tree">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tree.</div>
 			<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
-				<json-tree *ngIf="usedOnce" [data]="tableData"></json-tree>
+				<json-tree *ngIf="usedOnce" [data]="tableData" #jsonTree></json-tree>
 			</div>
 		</mat-tab>
 	</mat-tab-group>

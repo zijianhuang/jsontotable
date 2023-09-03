@@ -10,6 +10,7 @@ import { TreeTableCdkComponent } from './tree-table-cdk.component';
 import { ActivatedRoute } from '@angular/router';
 import { LocationStrategy, DOCUMENT } from '@angular/common';
 import { AppConfigConstants } from '../environments/environment';
+import { JsonTreeComponent } from './json-tree.component';
 
 @Component({
 	selector: 'app-root',
@@ -39,6 +40,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 	@ViewChild('treeTableRef') treeTableRef?: TreeTableCdkComponent;
 
 	@ViewChild('menuTrigger') mainMenuTrigger?: MatMenuTrigger;
+
+	@ViewChild('jsonTree') jsonTree?: JsonTreeComponent;
 
 	currentModuleName: string = 'table';
 
@@ -70,6 +73,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		@Inject(DOCUMENT) private doc: Document
 	) {
 		if (this.darkMode) {
+			console.debug('load dark theme');
 			this.loadStyles(true);
 		}
 
@@ -344,5 +348,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		}
 
 		this.loadStyles(this.darkMode!);
+
+		this.jsonTree?.refresh();
 	}
 }

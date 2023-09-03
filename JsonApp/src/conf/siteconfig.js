@@ -1,3 +1,3 @@
 const SITE_CONFIG = {
-	dark: true
+	dark: false
 }
