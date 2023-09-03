@@ -13,13 +13,6 @@ export class SettingsComponent implements OnInit {
 		return APP_DI_CONFIG.isSmallScreen;
 	}
 
-	get albumPoemViewerSettings(): ViewerSettings {
-		return APP_DI_CONFIG.albumPoemViewerSettings;
-	}
-
-	get poemViewerSettings(): ViewerSettings {
-		return APP_DI_CONFIG.poemViewerSettings;
-	}
 
 	@Input()
 	showTitle = true;

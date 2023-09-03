@@ -29,6 +29,10 @@
 				Copy HTML to Clipboard
 			</button>
 			<mat-divider></mat-divider>
+			<button mat-menu-item type="button" (click)="toggleDarkMode()">
+				<span>Dark Mode </span>  <span *ngIf="darkMode">&#x2713;</span>
+			</button>
+			<mat-divider></mat-divider>
 			<button mat-menu-item type="button" (click)="about()">
 				About
 			</button>
@@ -39,7 +43,7 @@
 	<wait></wait>
 </div>
 
-<div class="container-fluid app-container">
+<div class="container-fluid app-container data-area">
 	<mat-tab-group #tabGroup animationDuration="0" preserveContent class="header-less-tabs">
 		<mat-tab label="Table">
 			<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>

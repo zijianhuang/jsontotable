@@ -205,7 +205,7 @@ export class TreeTableBase implements OnInit {
 					});
 				} else if (v == null) { //null or undefined
 					//do nothing
-				} else {
+				} else { //never run to here
 					const subTableColumnDefs: TableColumnDef[] = [];
 					const objAsArray = [value];
 					this.GetTableColumnDef(objAsArray, subTableColumnDefs);

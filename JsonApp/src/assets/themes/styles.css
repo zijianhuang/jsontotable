@@ -1,0 +1,83 @@
+.fixed-top {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 990;
+}
+
+.fixed-top-above {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 995;
+}
+
+.container-fluid {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.app-container {
+	padding-top: 4.5em;
+	padding-bottom: 0.5em;
+}
+
+.nested-object-field-name {
+	font-weight: bold;
+}
+
+.nested-array-field-name {
+	font-style: italic;
+	font-weight: bold;
+}
+
+div.table-container {
+	width: 100%;
+	height: calc(100vh - 10em);
+	overflow: auto;
+}
+
+div.table-container-scroll {
+	width: 100%;
+	height: calc(100vh - 10em);
+	overflow: scroll;
+}
+
+.header-less-tabs .mat-mdc-tab-header {
+	display: none;
+}
+
+.string-node{
+	color: darkblue;
+}
+
+.number-node{
+	color: darkgreen;
+}
+
+.date-node{
+	color: blue;
+}
+
+.bigint-node{
+	color: forestgreen;
+}
+
+.bool-node{
+	color: brown;
+}
+
+.any-node{
+	color: black;
+}
+
+html, body {
+	overscroll-behavior-y: none;
+}
+
+.cell-font {
+	font-family: Consolas, monospace, Courier, Courier New;
+}

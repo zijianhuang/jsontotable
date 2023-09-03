@@ -36,83 +36,20 @@ export class APP_DI_CONFIG {
 
 	static readonly buildTime = AppConfigConstants.buildTime;
 
-	static albumPoemViewerSettings: ViewerSettings = {
-		showAlbums: false,//always not to show album tags.
-
-		get showAnnotations() {
-			return APP_DI_CONFIG.getStorageBooleanItem('albumPoemViewer.showAnnotations'); //presuming only one user is using the PC on that OS account.
-		},
-		set showAnnotations(v: boolean) {
-			APP_DI_CONFIG.setStorageBooleanItem('albumPoemViewer.showAnnotations', v);
-		},
-
-		get showDate() {
-			return APP_DI_CONFIG.getStorageBooleanItem('albumPoemViewer.showDate', 'true');
-		},
-		set showDate(v: boolean) {
-			APP_DI_CONFIG.setStorageBooleanItem('albumPoemViewer.showDate', v);
-		},
-
-		get showTags() {
-			return APP_DI_CONFIG.getStorageBooleanItem('albumPoemViewer.showTags');
-		},
-		set showTags(v: boolean) {
-			APP_DI_CONFIG.setStorageBooleanItem('albumPoemViewer.showTags', v);
-		},
-
-		showTitle: true,//always
-	}
+	static get dark(): boolean | undefined | null {
+		return APP_DI_CONFIG.getStorageBooleanItem('json2table.dark', 'false');
+	};
+	static set dark(v: boolean) {
+		APP_DI_CONFIG.setStorageBooleanItem('json2table.dark', v);
+	};
 
 	static isSmallScreen = window.innerWidth < 600 || window.innerHeight < 600; 
 
-	static poemViewerSettings: ViewerSettings = {
-		get showAlbums() {
-			return APP_DI_CONFIG.getStorageBooleanItem('poemViewer.showAlbums');
-		},
-		set showAlbums(v: boolean) {
-			APP_DI_CONFIG.setStorageBooleanItem('poemViewer.showAlbums', v);
-		},
-
-		get showAnnotations() {
-			return APP_DI_CONFIG.getStorageBooleanItem('poemViewer.showAnnotations', 'true');
-		},
-		set showAnnotations(v: boolean) {
-			APP_DI_CONFIG.setStorageBooleanItem('poemViewer.showAnnotations', v);
-		},
-
-		get showDate() {
-			return APP_DI_CONFIG.getStorageBooleanItem('poemViewer.showDate');
-		},
-		set showDate(v: boolean) {
-			APP_DI_CONFIG.setStorageBooleanItem('poemViewer.showDate', v);
-		},
-
-		get showTags() {
-			return APP_DI_CONFIG.getStorageBooleanItem('poemViewer.showTags');
-		},
-		set showTags(v: boolean) {
-			APP_DI_CONFIG.setStorageBooleanItem('poemViewer.showTags', v);
-		},
-
-		get showTitle() {
-			return APP_DI_CONFIG.getStorageBooleanItem('poemViewer.showTitle');
-		},
-		set showTitle(v: boolean) {
-			APP_DI_CONFIG.setStorageBooleanItem('poemViewer.showTitle', v);
-		},
-
-		get hideSideNavAfterSelect() {
-			return APP_DI_CONFIG.getStorageBooleanItem('poemViewer.hideSideNavAfterSelect', APP_DI_CONFIG.isSmallScreen ? 'true' : 'false');
-		},
-		set hideSideNavAfterSelect(v: boolean) {
-			APP_DI_CONFIG.setStorageBooleanItem('poemViewer.hideSideNavAfterSelect', v);
-		},
-
-
-	}
-
-	private static getStorageBooleanItem(key: string, defaultValue?: string) {
+	private static getStorageBooleanItem(key: string, defaultValue?: string): boolean | undefined {
 		const s = localStorage.getItem(key);
+		if (s == null) {
+			return undefined;
+		}
 		return s ? s === 'true' : defaultValue === 'true';
 	}
 
@@ -142,21 +79,6 @@ export class APP_DI_CONFIG {
 	}
 
 	static currentStaticDataIndex = 0;
-
-	static get dataTimestamp() {
-		return APP_DI_CONFIG.getStorageIntItem('poemViewer.dataTimestamp');
-	}
-	static set dataTimestamp(v: number) {
-		APP_DI_CONFIG.setStorageIntItem('poemViewer.dataTimestamp', v);
-	}
-
-	static get toUpdateData() {
-		return APP_DI_CONFIG.getStorageBooleanItem('poemViewer.toUpdateData');
-	}
-
-	static set toUpdateData(v: boolean) {
-		APP_DI_CONFIG.setStorageBooleanItem('poemViewer.toUpdateData', v);
-	}
 
 }
 

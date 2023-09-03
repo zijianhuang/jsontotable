@@ -2,7 +2,18 @@ export const environment = {
 	production: true
 };
 
+interface Site_Config {
+	dark?: boolean;
+}
+
 interface AppConfigConstantsType {
+	version: string;
+	buildTime?: string; // for BUILD_TIME
+}
+
+declare const SITE_CONFIG: AppConfigConstantsType
+
+interface AppConfigConstantsType extends Site_Config {
 	version: string;
 	buildTime?: string; // for BUILD_TIME
 }
@@ -15,6 +26,6 @@ declare const BUILD_TIME: {
 }
 
 export const AppConfigConstants: AppConfigConstantsType = {
-	version: '20221111.08', //alter this before build
+	version: '20230831.08', //alter this before build
 	...(typeof BUILD_TIME === 'undefined' ? { buildTime: 'Unknown' } : BUILD_TIME),
 }

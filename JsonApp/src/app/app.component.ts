@@ -8,7 +8,8 @@ import { ConfirmUploadService } from './confirmUpload.component';
 import { TextareaDialogService } from './textarea.component';
 import { TreeTableCdkComponent } from './tree-table-cdk.component';
 import { ActivatedRoute } from '@angular/router';
-import { LocationStrategy } from '@angular/common';
+import { LocationStrategy, DOCUMENT } from '@angular/common';
+import { AppConfigConstants } from '../environments/environment';
 
 @Component({
 	selector: 'app-root',
@@ -41,7 +42,20 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	currentModuleName: string = 'table';
 
-	url : string | null = '';
+	url: string | null = '';
+
+	get darkMode() {
+		if (APP_DI_CONFIG.dark != null) {// if user defined, then what the uer defined
+			return APP_DI_CONFIG.dark;
+		} else if (APP_DI_CONFIG.dark == null) { //if user did not define, the startup const determine
+			return AppConfigConstants.dark;
+		}
+
+		return false;
+	}
+	//set darkMode(v: boolean | undefined | null) {
+	//	APP_DI_CONFIG.dark = v;
+	//}
 
 	constructor(public confirmUploadService: ConfirmUploadService,
 		private ref: ChangeDetectorRef,
@@ -53,7 +67,12 @@ export class AppComponent implements OnInit, AfterViewInit {
 		@Inject(DIALOG_ACTIONS_ALIGN) public actionsAlign: 'start' | 'center' | 'end',
 		private locationStrategy: LocationStrategy,
 		private waitService: WaitService,
+		@Inject(DOCUMENT) private doc: Document
 	) {
+		if (this.darkMode) {
+			this.loadStyles(true);
+		}
+
 		//goback prevention
 		history.pushState(null, '', window.location.href);
 		this.locationStrategy.onPopState(() => {
@@ -242,7 +261,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 		//document.addEventListener('copy', listener);
 		//document.execCommand('copy');
 
-//		this.copyTextToClipboard(htmlText, 'text/html');
+		//		this.copyTextToClipboard(htmlText, 'text/html');
 		//		this.alertService.success('Copied to clipboard');
 		const clipboardItem = new ClipboardItem({ //thanks to https://www.nikouusitalo.com/blog/why-isnt-clipboard-write-copying-my-richtext-html/
 			'text/plain': new Blob(
@@ -292,5 +311,38 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	about() {
 		window.open('https://jsontotable.fonlow.org', '_blank');
+	}
+
+	private loadStyles(dark: boolean) {
+		const head = this.doc.getElementsByTagName('head')[0];
+		const themeFile = dark ? 'themedark.css' : 'theme.css';
+		let themeLink = this.doc.getElementById(
+			'theme'
+		) as HTMLLinkElement;
+
+
+		if (themeLink) {
+			themeLink.href = `assets/themes/${themeFile}`;
+		}
+
+		let customLink = this.doc.getElementById(
+			'custom'
+		) as HTMLLinkElement;
+
+		const customFile = dark ? 'stylesdark.css' : 'styles.css';
+		if (customLink) {
+			customLink.href = `assets/themes/${customFile}`;
+		}
+
+	}
+
+	toggleDarkMode() {
+		if (this.darkMode) {
+			APP_DI_CONFIG.dark = false;
+		} else {
+			APP_DI_CONFIG.dark = true;
+		}
+
+		this.loadStyles(this.darkMode!);
 	}
 }
