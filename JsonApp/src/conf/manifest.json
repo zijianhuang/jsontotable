@@ -2,7 +2,7 @@
 	"name": "JSON to Table",
 	"short_name": "Json2Table",
 	"description": "Display JSON file in tables",
-	"id": "APS.Json2Table",
+	"id": "Fonlow.Json2Table",
 	"theme_color": "#1976d2",
 	"background_color": "#fafafa",
 	"display": "standalone",

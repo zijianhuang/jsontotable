@@ -6,17 +6,31 @@
 		{
 			"name": "appRoot",
 			"installMode": "prefetch",
+			"updateMode": "prefetch",
 			"resources": {
 				"files": [
-					"/favicon.ico",
+					"/favicon.png",
+					"/index.html",
 					"/*.css",
+					"/*.json",
 					"/*.js"
 				]
 			}
 		},
 		{
+			"name": "scripts",
+			"installMode": "prefetch",
+			"updateMode": "prefetch",
+			"resources": {
+				"files": [
+					"/*.js",
+					"/*.json"
+				]
+			}
+		},
+		{
 			"name": "assets",
-			"installMode": "lazy",
+			"installMode": "prefetch",
 			"updateMode": "prefetch",
 			"resources": {
 				"files": [

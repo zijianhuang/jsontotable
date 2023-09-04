@@ -17,6 +17,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { UpdateAppService } from './updateApp.service';
 
 const routes: Routes = [
 
@@ -56,6 +57,7 @@ const routes: Routes = [
 			useValue: 'end'
 		},
 
+		UpdateAppService,
 		//ActivatedRoute,
 	],
 	bootstrap: [AppComponent]

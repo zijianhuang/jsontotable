@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LocationStrategy, DOCUMENT } from '@angular/common';
 import { AppConfigConstants } from '../environments/environment';
 import { JsonTreeComponent } from './json-tree.component';
+import { UpdateAppService } from './updateApp.service';
 
 @Component({
 	selector: 'app-root',
@@ -70,7 +71,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 		@Inject(DIALOG_ACTIONS_ALIGN) public actionsAlign: 'start' | 'center' | 'end',
 		private locationStrategy: LocationStrategy,
 		private waitService: WaitService,
-		@Inject(DOCUMENT) private doc: Document
+		@Inject(DOCUMENT) private doc: Document,
+		private updateAppService: UpdateAppService,
 	) {
 		if (this.darkMode) {
 			console.debug('load dark theme');
@@ -104,7 +106,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 					}
 				}
 			}
-			);
+		);
+
+		this.updateAppService.checkAvailable();
 	}
 
 	ngAfterViewInit(): void {
@@ -215,6 +219,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 		if (this.htmlBuildTime || this.htmlVersion) {
 			this.alertService.success('App updated');
+			console.info(`Version: ${APP_DI_CONFIG.version}; Build: ${this.htmlBuildTime}`);
 		}
 
 	}
