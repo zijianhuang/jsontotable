@@ -9,7 +9,6 @@
 			"updateMode": "prefetch",
 			"resources": {
 				"files": [
-					"/favicon.png",
 					"/index.html",
 					"/*.css",
 					"/*.json",
@@ -18,13 +17,12 @@
 			}
 		},
 		{
-			"name": "scripts",
+			"name": "conf",
 			"installMode": "prefetch",
 			"updateMode": "prefetch",
 			"resources": {
 				"files": [
-					"/*.js",
-					"/*.json"
+					"/conf/**"
 				]
 			}
 		},

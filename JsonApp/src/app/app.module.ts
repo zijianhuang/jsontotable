@@ -3,20 +3,20 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HttpClientModule } from '@angular/common/http';
+import { Routes } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { DIALOG_ACTIONS_ALIGN, NmceComponentsModule, Nmce_UI_ServicesModule } from 'nmce';
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConfirmUploadComponent, ConfirmUploadService } from './confirmUpload.component';
-import { NGMDModule } from './ngmd.module';
-import { TreeTableComponent } from './tree-table.component';
-import { DIALOG_ACTIONS_ALIGN, NmceComponentsModule, Nmce_UI_ServicesModule } from 'nmce';
-import { TreeTableCdkComponent } from './tree-table-cdk.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 import { JsonTreeComponent } from './json-tree.component';
+import { NGMDModule } from './ngmd.module';
 import { TextareaComponent, TextareaDialogService } from './textarea.component';
-import { NgxDropzoneModule } from 'ngx-dropzone';
-import { HttpClientModule } from '@angular/common/http';
-import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
+import { TreeTableCdkComponent } from './tree-table-cdk.component';
+import { TreeTableComponent } from './tree-table.component';
 import { UpdateAppService } from './updateApp.service';
 
 const routes: Routes = [
@@ -38,7 +38,7 @@ const routes: Routes = [
 		BrowserAnimationsModule,
 		AppRoutingModule,
 		HttpClientModule,
-		ServiceWorkerModule.register(document.baseURI + 'ngsw-worker.js', {
+		ServiceWorkerModule.register('ngsw-worker.js', {
 			enabled: environment.production,
 			// Register the ServiceWorker as soon as the application is stable
 			// or after 30 seconds (whichever comes first).
