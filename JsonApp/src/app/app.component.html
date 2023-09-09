@@ -44,20 +44,18 @@
 </div>
 
 <div class="container-fluid app-container data-area">
-	<mat-tab-group #tabGroup animationDuration="0" preserveContent class="header-less-tabs">
-		<mat-tab label="Table">
-			<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
-			<!--<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>-->
-			<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
-				<tree-table-cdk *ngIf="hackFlag" #treeTableRef [data]="tableData"></tree-table-cdk>
-			</div>
-		</mat-tab>
-		<mat-tab label="Tree">
-			<div *ngIf="!usedOnce">Display loaded JSON data in tree.</div>
-			<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
-				<json-tree *ngIf="usedOnce" [data]="tableData" #jsonTree></json-tree>
-			</div>
-		</mat-tab>
-	</mat-tab-group>
+	<div id="table" [hidden]="current==1">
+		<div *ngIf="!usedOnce">Display loaded JSON data in tables.</div>
+		<!--<tree-table *ngIf="useMaterial && hackFlag" [data]="tableData"></tree-table>-->
+		<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
+			<tree-table-cdk *ngIf="hackFlag" #treeTableRef [data]="tableData"></tree-table-cdk>
+		</div>
+	</div>
+	<div id="tree" [hidden]="current==0">
+		<div *ngIf="!usedOnce">Display loaded JSON data in tree.</div>
+		<div [ngClass]="scroll?'table-container-scroll' : 'table-container'">
+			<json-tree *ngIf="usedOnce" [data]="tableData" #jsonTree></json-tree>
+		</div>
+	</div>
 </div>
 <!--<tabulator-table [tableData]="tableData" [columnNames]="columnNames"  [height]="'800px'"></tabulator-table>-->

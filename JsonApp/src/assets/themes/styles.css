@@ -14,17 +14,6 @@
 	z-index: 995;
 }
 
-.container-fluid {
-	width: 100%;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-.app-container {
-	padding-top: 4.5em;
-	padding-bottom: 0.5em;
-}
-
 .nested-object-field-name {
 	font-weight: bold;
 }
@@ -34,15 +23,25 @@
 	font-weight: bold;
 }
 
+.container-fluid {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.app-container {
+	padding-top: 4em;
+}
+
 div.table-container {
 	width: 100%;
-	height: calc(100vh - 10em);
+	height: calc(100vh - 5em);
 	overflow: auto;
 }
 
 div.table-container-scroll {
 	width: 100%;
-	height: calc(100vh - 10em);
+	height: calc(100vh - 5em);
 	overflow: scroll;
 }
 

@@ -36,7 +36,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	scroll = false;
 
-	@ViewChild('tabGroup') tabGroup?: MatTabGroup;
+	current = 0;
 
 	@ViewChild('treeTableRef') treeTableRef?: TreeTableCdkComponent;
 
@@ -113,11 +113,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.loading = false;
-		if (this.tabGroup) {
-			this.tabGroup.selectedIndex = 0;
-			console.debug('current tab should be table.');
-		}
-
 		if (!this.currentFileName && !this.url) {
 			this.mainMenuTrigger?.openMenu();
 		};
@@ -307,15 +302,11 @@ export class AppComponent implements OnInit, AfterViewInit {
 	};
 
 	toggleTable() {
-		if (this.tabGroup) {
-			this.tabGroup.selectedIndex = 0;
-		}
+		this.current = 0;
 	}
 
 	toggleTree() {
-		if (this.tabGroup) {
-			this.tabGroup.selectedIndex = 1;
-		}
+		this.current = 1;
 	}
 
 	about() {
