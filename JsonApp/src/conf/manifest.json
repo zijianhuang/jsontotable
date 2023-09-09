@@ -8,6 +8,23 @@
 	"display": "standalone",
 	"scope": "../",
 	"start_url": "../",
+	"categories": [
+		"productivity",
+		"utilities"
+	],
+	"orientation": "any",
+	"launch_handler": {
+		"client_mode": [ "navigate-existing, auto" ]
+	},
+	"screenshots": [
+		{
+			"src": "screenshot.jpg",
+			"sizes": "1920x1080",
+			"type": "image/jpg",
+			"platform": "wide"
+		}
+	],
+	"lang": "en",
 	"icons": [
 		{
 			"src": "../assets/icons/icon-72x72.png",
