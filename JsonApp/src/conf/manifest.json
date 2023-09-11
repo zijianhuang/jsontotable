@@ -6,6 +6,7 @@
 	"theme_color": "#1976d2",
 	"background_color": "#fafafa",
 	"display": "standalone",
+	"display_override": [ "window-controls-overlay", "browser" ],
 	"scope": "../",
 	"start_url": "../",
 	"categories": [
@@ -13,18 +14,45 @@
 		"utilities"
 	],
 	"orientation": "any",
-	"launch_handler": {
-		"client_mode": [ "navigate-existing, auto" ]
-	},
 	"screenshots": [
 		{
-			"src": "screenshot.jpg",
-			"sizes": "1920x1080",
-			"type": "image/jpg",
+			"src": "../assets/screenshots/screenshot.png",
+			"sizes": "1920x1056",
+			"type": "image/png",
+			"platform": "wide"
+		},
+		{
+			"src": "../assets/screenshots/smalldark.png",
+			"sizes": "715x493",
+			"type": "image/png",
 			"platform": "wide"
 		}
 	],
 	"lang": "en",
+	"launch_handler": {
+		"client_mode": [ "auto" ]
+	},
+	"prefer_related_applications": false,
+	"dir": "auto",
+	"handle_links": "auto",
+	"edge_side_panel": {},
+	"protocol_handlers": [],
+	"scope_extensions": [],
+	"share_target": {},
+	"shortcuts": [
+		{
+			"name": "Json2Table",
+			"url": "https://jsontotable.fonlow.com/app/",
+			"description": "Json2Table App"
+		},
+		{
+			"name": "About",
+			"url": "https://jsontotable.fonlow.com",
+			"description": "About"
+		}
+	],
+	"iarc_rating_id": "27508ec0-063b-4cd0-b1d4-c8a24c4f0760",
+	"related_applications": [],
 	"icons": [
 		{
 			"src": "../assets/icons/icon-72x72.png",

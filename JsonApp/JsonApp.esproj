@@ -10,4 +10,9 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\JsonToTable</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="C:\VsProjects\Fonlow\jsontotable\Home\privacy.html">
+      <Link>privacy.html</Link>
+    </None>
+  </ItemGroup>
 </Project>

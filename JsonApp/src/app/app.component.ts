@@ -1,16 +1,15 @@
+import { DOCUMENT, LocationStrategy } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { MatTabGroup } from '@angular/material/tabs';
+import { ActivatedRoute } from '@angular/router';
 import { AlertService, DIALOG_ACTIONS_ALIGN, TextInputService, WaitService } from 'nmce';
+import { AppConfigConstants } from '../environments/environment';
 import { APP_DI_CONFIG } from './app-config';
 import { ConfirmUploadService } from './confirmUpload.component';
+import { JsonTreeComponent } from './json-tree.component';
 import { TextareaDialogService } from './textarea.component';
 import { TreeTableCdkComponent } from './tree-table-cdk.component';
-import { ActivatedRoute } from '@angular/router';
-import { LocationStrategy, DOCUMENT } from '@angular/common';
-import { AppConfigConstants } from '../environments/environment';
-import { JsonTreeComponent } from './json-tree.component';
 import { UpdateAppService } from './updateApp.service';
 
 @Component({
@@ -31,8 +30,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 	hackFlag = true;
 
 	useMaterial = false;
-
-	usedOnce = false;
 
 	scroll = false;
 
@@ -186,7 +183,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 	private rerender() {
 		this.waitService.setWait({ loading: true });
 		this.ref.detectChanges();
-		this.usedOnce = true;
 		this.hackFlag = false; //https://stackoverflow.com/questions/50383003/how-to-re-render-a-component-manually-angular-5
 		this.ref.detectChanges(); //hacky, but simple and works.
 		this.hackFlag = true;
@@ -329,7 +325,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 			'custom'
 		) as HTMLLinkElement;
 
-		const customFile = dark ? 'stylesdark.css' : 'styles.css';
+		const customFile = dark ? 'colorsdark.css' : 'colors.css';
 		if (customLink) {
 			customLink.href = `assets/themes/${customFile}`;
 		}
